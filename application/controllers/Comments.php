@@ -20,7 +20,7 @@ class Comments extends REST_Controller {
       $this->response(['status' => FALSE,'message' => "data tidak ditemukan"], REST_Controller::HTTP_INTERNAL_SERVER_ERROR);
     }
   }
-
+ 
   public function index_post(){
     $id_news = $this->post('id_news');
     $email = $this->post('email');
