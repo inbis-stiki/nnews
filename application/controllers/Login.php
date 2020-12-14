@@ -5,11 +5,11 @@ class Login extends CI_Controller {
 
 	function __construct(){
 		parent::__construct();
-		$this->load->model('Mcaptcha');
+		// $this->load->model('Mcaptcha');
 	}
 
 	public function index(){
-		$data['captcha'] = $this->Mcaptcha->buat_captcha();
+		// $data['captcha'] = $this->Mcaptcha->buat_captcha();
 		$this->load->view('login', $data);
 	}
 

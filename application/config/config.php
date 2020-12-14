@@ -26,7 +26,8 @@ ini_set('max_execution_time', '1200');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'https://ilham.kristomoyo.com';
+// $config['base_url'] = 'https://ilham.kristomoyo.com';
+$config['base_url'] = 'https://localhost/nnews';
 
 /*
 |--------------------------------------------------------------------------
