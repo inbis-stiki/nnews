@@ -20,6 +20,20 @@ class News extends REST_Controller {
     $query = $this->db->get('view_news');
     
     if($query){
+      foreach ($query->result() as $q){
+        if ($q->NAME_CATEGORY == 'Galeri'){
+          $images = [];
+          $news_image = $this->db->where('ID_NEWS', $q->ID_NEWS)->get('galeri')->result();
+          foreach ($news_image as $ni){
+            array_push($images, $ni->IMAGE_FILE);
+          }
+          $q->NEWS_IMAGE = $images;
+        } else {
+          if (isset($q->NEWS_IMAGE)){
+            $q->NEWS_IMAGE = [$q->NEWS_IMAGE];
+          }
+        }
+      }
       $this->response(['status' => TRUE, 'data' => $query->num_rows() > 0 ? $query->result() : []], REST_Controller::HTTP_OK);
     }else{
       $this->response(['status' => FALSE, 'message' => "data tidak ditemukan"], REST_Controller::HTTP_OK);
@@ -65,9 +79,21 @@ class News extends REST_Controller {
     $this->db->where($condition);
     $this->db->order_by('DATE_NEWS', 'DESC');
 
-    $query = $this->db->get('view_news');
+    $query = $this->db->get('view_news')->row();
     if($query){
-      $this->response(['status' => TRUE, 'data' => $query->num_rows() > 0 ? $query->row() : []]);
+      if ($query->NAME_CATEGORY == 'Galeri'){
+        $images = [];
+        $news_image = $this->db->where('ID_NEWS', $query->ID_NEWS)->get('galeri')->result();
+        foreach ($news_image as $ni){
+          array_push($images, $ni->IMAGE_FILE);
+        }
+        $query->NEWS_IMAGE = $images;
+      } else {
+        if (isset($query->NEWS_IMAGE)){
+          $query->NEWS_IMAGE = [$query->NEWS_IMAGE];
+        }
+      }
+      $this->response(['status' => TRUE, 'data' => isset($query) ? $query : []]);
     }else{
       $this->response(['status' => FALSE, 'message' => "data tidak ditemukan"], REST_Controller::HTTP_OK);
     }
