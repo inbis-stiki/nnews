@@ -57,7 +57,7 @@
                   <td class="text-center">
                     <?php 
                     if (in_array($this->session->userdata('role'), ['editor', 'admin'])) { ?>
-                    <a href="<?= base_url('videos/edit_news/' . $video->ID_VIDEO) ?>" class="btn btn-sm btn-info"><i class="fa fa-pencil"></i>&nbsp;Edit</a>
+                    <a href="<?= base_url('videos/edit_video' . $video->ID_VIDEO) ?>" class="btn btn-sm btn-info"><i class="fa fa-pencil"></i>&nbsp;Edit</a>
                     <a href="#" data-toggle="modal" data-target="#ModalDelete" data-id="<?php echo $video->ID_VIDEO; ?>"
                         data-title="<?php echo $video->TITLE; ?>" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i>&nbsp;Hapus</a>
                     <?php } ?>
