@@ -58,8 +58,8 @@
                     <?php 
                     if (in_array($this->session->userdata('role'), ['editor', 'admin'])) { ?>
                     <a href="<?= base_url('news/edit_news/' . $video->ID_VIDEO) ?>" class="btn btn-sm btn-info"><i class="fa fa-pencil"></i>&nbsp;Edit</a>
-                    <a href="#" data-toggle="modal" data-target="#ModalDelete" data-id="<?php echo $news->ID_VIDEO; ?>"
-                        data-title="<?php echo $news->TITLE_NEWS; ?>" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i>&nbsp;Hapus</a>
+                    <a href="#" data-toggle="modal" data-target="#ModalDelete" data-id="<?php echo $video->ID_VIDEO; ?>"
+                        data-title="<?php echo $video->TITLE_NEWS; ?>" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i>&nbsp;Hapus</a>
                     <?php } ?>
                     <?php if ($video->STATUS_PUBLISHED == 't'){ ?>
                         <a href="<?= base_url('video/change/' . $video->ID_VIDEO . '/' . 0) ?>" class="btn btn-sm btn-secondary"><i class="fa fa-eye-slash"></i>&nbsp;Sembunyikan</a>
