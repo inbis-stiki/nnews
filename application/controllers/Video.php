@@ -6,7 +6,8 @@ class Video extends CI_Controller {
 	function __construct(){
     parent::__construct();
     $this->load->library('youtube');
-    $this->load->model('Mvideo');
+    // $this->load->model('Mvideo');
+    $this->load->model(array('Mvideo', 'Mnews'));
 	}
 
 	public function index(){
