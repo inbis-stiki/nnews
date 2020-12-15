@@ -10,9 +10,10 @@ class Video extends CI_Controller {
 	}
 
 	public function index(){
-    $param['main_content'] = 'videoslist';
+    $param['main_content'] = 'videos/videoslist';
 		$param['page_title'] = 'Videos List';
-		$param['videos_list'] = $this->Mvideo->getAllVideo();
+    // $param['videos_list'] = $this->Mvideo->getAllVideo();
+		$param['news_list'] = $this->Mnews->getAllNews();
 		$this->load->view('dashboard', $param);
   }
 

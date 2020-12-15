@@ -1,7 +1,7 @@
 <div class="py-1">
   <div class="container">
     <div class="row">
-      <div class="col-md-12"><h3 class="display-3">Berita Tes</h3></div>
+      <div class="col-md-12"><h3 class="display-3">Berita</h3></div>
     </div>
   </div>
 </div>
