@@ -27,7 +27,7 @@
 <div class="py-0">
   <div class="container">
     <div class="row">
-      <div class="col-md-12"><a class="btn btn-primary" href="<?php echo base_url('news/add_video'); ?>"><i class="fa fa-plus"></i>&ensp;Tambahkan Video</a></div>
+      <div class="col-md-12"><a class="btn btn-primary" href="<?php echo base_url('videos/add_video'); ?>"><i class="fa fa-plus"></i>&ensp;Tambahkan Video</a></div>
     </div>
   </div>
 </div>
@@ -57,7 +57,7 @@
                   <td class="text-center">
                     <?php 
                     if (in_array($this->session->userdata('role'), ['editor', 'admin'])) { ?>
-                    <a href="<?= base_url('news/edit_news/' . $video->ID_VIDEO) ?>" class="btn btn-sm btn-info"><i class="fa fa-pencil"></i>&nbsp;Edit</a>
+                    <a href="<?= base_url('videos/edit_news/' . $video->ID_VIDEO) ?>" class="btn btn-sm btn-info"><i class="fa fa-pencil"></i>&nbsp;Edit</a>
                     <a href="#" data-toggle="modal" data-target="#ModalDelete" data-id="<?php echo $video->ID_VIDEO; ?>"
                         data-title="<?php echo $video->TITLE; ?>" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i>&nbsp;Hapus</a>
                     <?php } ?>
@@ -88,7 +88,7 @@
         <p id="newstitle"></p>
       </div>
       <div class="modal-footer"> 
-        <a href="<?php echo base_url() ?>news/delete/<?php echo $video->ID_VIDEO?>" class="btn btn-danger">Delete</a>
+        <a href="<?php echo base_url() ?>videos/delete/<?php echo $video->ID_VIDEO?>" class="btn btn-danger">Delete</a>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> 
       </div>
     </div>
@@ -101,6 +101,6 @@ $('#ModalDelete').on('show.bs.modal', function (event) {
     var modal = $(this)
     var news_title = button.data('title');
     document.getElementById('newstitle').innerHTML = news_title;
-    modal.find('.modal-footer a').attr("href", "<?= base_url() ?>news/delete/" + news_id)
+    modal.find('.modal-footer a').attr("href", "<?= base_url() ?>videos/delete/" + news_id)
 })
 </script>
