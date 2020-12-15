@@ -27,7 +27,7 @@
 <div class="py-0">
   <div class="container">
     <div class="row">
-      <div class="col-md-12"><a class="btn btn-primary" href="<?php echo base_url('news/add_news'); ?>"><i class="fa fa-plus"></i>&ensp;Tambahkan Berita</a></div>
+      <div class="col-md-12"><a class="btn btn-primary" href="<?php echo base_url('news/add_video'); ?>"><i class="fa fa-plus"></i>&ensp;Tambahkan Video</a></div>
     </div>
   </div>
 </div>
@@ -40,35 +40,33 @@
           <table class="table table-striped table-borderless" id="newstable">
             <thead>
               <tr>
-                <th class="text-center" style="width: 30%">Judul</th>
-                <th class="text-center">Kategori</th>
-                <th class="text-center">Tanggal Publikasi</th>
-                <th class="text-center"><i class="fa fa-eye"></i></th>
-                <th class="text-center"><i class="fa fa-heart"></i></th>
-                <th class="text-center"><i class="fa fa-share-alt"></i></th>
-                <th class="text-center">Aksi</th>
+                <th>Thumbnail</th>
+                <th>Judul (Deskripsi)</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
               <?php $i = 1;
-              foreach ($news_list as $news){ ?>
+              foreach ($videos_list as $video){ ?>
                 <tr>
-                  <td><?php echo $news->TITLE_NEWS; ?></td>
-                  <td class="text-center"><?php echo $news->NAME_CATEGORY; ?></td>
-                  <td class="text-center"><?php echo tgl_indo($news->DATE_NEWS) ?></td>
-                  <td class="text-center"><?php echo $news->VIEWS_COUNT; ?></td>
-                  <td class="text-center"><?php echo $news->LIKES ?></td>
-                  <td class="text-center"><?php echo $news->SHARES_COUNT; ?></td>
+                  <td><img src="<?= $video->URL_DEFAULT_THUMBNAIL ?>" alt=""></td>
+                  <td>
+                    <h6><a href="http://www.youtube.com/watch?v=<?= $video->ID_VIDEO ?>"><?= $video->TITLE ?></a></h6>
+                    <small><?= $video->DESCRIPTION ?></small>
+                  </td>
                   <td class="text-center">
-                    <?php if (in_array($this->session->userdata('role'), ['publisher', 'admin'])){ ?>
-                      <a href="<?= base_url('news/detail/' . $news->ID_NEWS) ?>" class="btn btn-sm btn-secondary"><i class="fa fa-tasks"></i>&nbsp;Detail</a>
-                    <?php }
+                    <?php 
                     if (in_array($this->session->userdata('role'), ['editor', 'admin'])) { ?>
-                    <a href="<?= base_url('news/edit_news/' . $news->ID_NEWS) ?>" class="btn btn-sm btn-info"><i class="fa fa-pencil"></i>&nbsp;Edit</a>
-                    <a href="#" data-toggle="modal" data-target="#ModalDelete" data-id="<?php echo $news->ID_NEWS; ?>"
+                    <a href="<?= base_url('news/edit_news/' . $video->ID_VIDEO) ?>" class="btn btn-sm btn-info"><i class="fa fa-pencil"></i>&nbsp;Edit</a>
+                    <a href="#" data-toggle="modal" data-target="#ModalDelete" data-id="<?php echo $news->ID_VIDEO; ?>"
                         data-title="<?php echo $news->TITLE_NEWS; ?>" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i>&nbsp;Hapus</a>
                     <?php } ?>
-                    <a href="#" class="btn btn-sm btn-success"><i class="fa fa-bar-chart"></i>&nbsp;Statistik</a>
+                    <?php if ($video->STATUS_PUBLISHED == 't'){ ?>
+                        <a href="<?= base_url('video/change/' . $video->ID_VIDEO . '/' . 0) ?>" class="btn btn-sm btn-secondary"><i class="fa fa-eye-slash"></i>&nbsp;Sembunyikan</a>
+                    <?php } else { ?>
+                        <a href="<?= base_url('video/change/' . $video->ID_VIDEO . '/' . 1) ?>" class="btn btn-sm btn-secondary"><i class="fa fa-eye"></i>&nbsp;Tampilkan</a>
+                    <?php } ?>
+                    <!-- <a href="#" class="btn btn-sm btn-success"><i class="fa fa-bar-chart"></i>&nbsp;Statistik</a> -->
                   </td>
                 </tr>
               <?php $i++; } ?>
@@ -90,7 +88,7 @@
         <p id="newstitle"></p>
       </div>
       <div class="modal-footer"> 
-        <a href="<?php echo base_url() ?>news/delete/<?php echo $news->ID_NEWS?>" class="btn btn-danger">Delete</a>
+        <a href="<?php echo base_url() ?>news/delete/<?php echo $video->ID_VIDEO?>" class="btn btn-danger">Delete</a>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> 
       </div>
     </div>
