@@ -42,7 +42,7 @@
               <tr>
                 <th>Thumbnail</th>
                 <th>Judul (Deskripsi)</th>
-                <th style="width: 30%;align: center;">Action</th>
+                <th style="width: 30%;text-align: center;">Action</th>
               </tr>
             </thead>
             <tbody>
