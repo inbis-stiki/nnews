@@ -69,13 +69,13 @@ class User extends REST_Controller {
       $queryCheckValidUser  = $this->db->get('mobile_user')->row();
       $this->db->where($condition);
 
-      if(!empty($queryCheckValidUser)){
+      if(!isset($queryCheckValidUser)){
         $this->db->select('EMAIL, NAME, NAME_ROLE, PROFILEPIC_USER, PHONE, DATE_BIRTH, GENDER');
         $condition = array('EMAIL' => $email, 'PASSWORD' => md5($password));
         $this->db->where($condition);
         $queryGetDataUser = $this->db->get('view_mobile_user')->row();
 
-        $this->response(['status' => TRUE, 'data' => !empty($queryGetDataUser) ? $queryGetDataUser: []], REST_Controller::HTTP_OK);
+        $this->response(['status' => TRUE, 'data' => !isset($queryGetDataUser) ? $queryGetDataUser: []], REST_Controller::HTTP_OK);
       }else{
         $this->response(['status' => FALSE, 'message' => "Data user tidak ditemukan"], REST_Controller::HTTP_OK);
       }
@@ -94,7 +94,7 @@ class User extends REST_Controller {
     if($email != '' && $idRole != '' && $name != '' && $password != '' && $phone != ''){
       // check data if found
       $queryCheckUserIsFound = $this->db->where('EMAIL', $email)->get('mobile_user')->row();
-      if(empty($queryCheckUserIsFound)){
+      if(isset($queryCheckUserIsFound)){
         $dataMobileUser = array(
           'EMAIL'       => $email,
           'ID_ROLE'     => $idRole,
