@@ -31,6 +31,8 @@ class User extends REST_Controller {
       $this->response(['status' => FALSE, 'message' => "Data tidak ditemukan"], REST_Controller::HTTP_OK);
     }
   }
+  
+  
 
   public function index_post() {
     $email = $this->post('email');
@@ -56,6 +58,66 @@ class User extends REST_Controller {
       }
     } else {
       $this->response(['status' => FALSE, 'message' => "User sudah terdaftar"], 502);
+    }
+  }
+
+  public function login_post(){
+    $email    = $this->post('email');
+    $password = $this->post('password');
+    if($email != '' && $password != ''){
+      $condition            = array('EMAIL' => $email, 'PASSWORD' => md5($password));
+      $queryCheckValidUser  = $this->db->get('mobile_user')->row();
+      $this->db->where($condition);
+
+      if(!empty($queryCheckValidUser)){
+        $this->db->select('EMAIL, NAME, NAME_ROLE, PROFILEPIC_USER, PHONE, DATE_BIRTH, GENDER');
+        $condition = array('EMAIL' => $email, 'PASSWORD' => md5($password));
+        $this->db->where($condition);
+        $queryGetDataUser = $this->db->get('view_mobile_user')->row();
+
+        $this->response(['status' => TRUE, 'data' => !empty($queryGetDataUser) ? $queryGetDataUser: []], REST_Controller::HTTP_OK);
+      }else{
+        $this->response(['status' => FALSE, 'message' => "Data user tidak ditemukan"], REST_Controller::HTTP_OK);
+      }
+    }else{
+      $this->response(['status' => FALSE, 'message' => "Parameter tidak cocok"], REST_Controller::HTTP_OK);
+    }
+  }
+
+  public function register_post(){
+    $email    = $this->post('email');
+    $idRole   = $this->post('idRole');
+    $name     = $this->post('name');
+    $password = md5($this->post('password'));
+    $phone    = $this->post('phone');
+
+    if($email != '' && $idRole != '' && $name != '' && $password != '' && $phone != ''){
+      // check data if found
+      $queryCheckUserIsFound = $this->db->where('EMAIL', $email)->get('mobile_user')->row();
+      if(empty($queryCheckUserIsFound)){
+        $dataMobileUser = array(
+          'EMAIL'       => $email,
+          'ID_ROLE'     => $idRole,
+          'NAME'        => $name,
+          'PASSWORD'    => $password,
+          'created_at'  => date('Y-m-d H:i:s')
+        );
+  
+        $dataProfileUser = array(
+          'EMAIL'       => $email,
+          'PHONE'       => $phone,
+          'created_at'  => date('Y-m-d H:i:s')
+        );
+  
+        $this->db->insert('mobile_user', $dataMobileUser);
+        $this->db->insert('profile_user', $dataProfileUser);
+  
+        $this->response(['status' => TRUE, 'message' => "Data user berhasil disimpan"], REST_Controller::HTTP_OK);
+      }else{
+        $this->response(['status' => FALSE, 'message' => "Data user sudah terdaftar"], REST_Controller::HTTP_OK);
+      }
+    }else{
+      $this->response(['status' => FALSE, 'message' => "Parameter tidak cocok"], REST_Controller::HTTP_OK);
     }
   }
 
