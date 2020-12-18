@@ -64,7 +64,7 @@ class User extends REST_Controller {
   public function login_post(){
     $email    = $this->post('email');
     $password = $this->post('password');
-    if($email != '' && $password != ''){
+    if($email != '' && $password != ''){ // check param valid
       $condition            = array('EMAIL' => $email, 'PASSWORD' => md5($password));
       $this->db->where($condition);
       $queryCheckValidUser  = $this->db->get('mobile_user')->row();
@@ -91,10 +91,10 @@ class User extends REST_Controller {
     $password = md5($this->post('password'));
     $phone    = $this->post('phone');
 
-    if($email != '' && $idRole != '' && $name != '' && $password != '' && $phone != ''){
-      // check data if found
+    if($email != '' && $idRole != '' && $name != '' && $password != '' && $phone != ''){ //check param valid
       $queryCheckUserIsFound = $this->db->where('EMAIL', $email)->get('mobile_user')->row();
-      if($queryCheckUserIsFound == null){
+      
+      if($queryCheckUserIsFound == null){ // check data if found
         $dataMobileUser = array(
           'EMAIL'       => $email,
           'ID_ROLE'     => $idRole,
