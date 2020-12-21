@@ -13,7 +13,7 @@ class News extends REST_Controller {
 
   function index_get() {
 
-    $this->db->select('ID_NEWS, NAME_CATEGORY, TITLE_NEWS, NEWS_IMAGE, DATE_NEWS');
+    $this->db->select('ID_NEWS, NAME_CATEGORY, TITLE_NEWS, NEWS_IMAGE, DATE_NEWS, EDITOR, VERIFICATOR');
     $this->db->where('STATUS', 'published');
     $this->db->order_by('DATE_NEWS', 'DESC');
 
@@ -117,26 +117,61 @@ class News extends REST_Controller {
     //   $this->response(['status' => FALSE, 'message' => "data tidak ditemukan"], REST_Controller::HTTP_OK);
     // }
   }
-  
+
   function click_post() {
-    $idnews = $this->post('id_news');
-    $email = $this->post('email');
-    $data = $this->Mnews->clickViews($idnews, $email);
-    if ($data) {
-      $this->response(['status' => TRUE, 'message' => "Clicked"], REST_Controller::HTTP_OK);
-    } else {
-      $this->response(['status' => FALSE, 'message' => "Failed"], REST_Controller::HTTP_NOT_FOUND);
+    $email  = $this->post('email');
+    $idNews = $this->post('idNews');
+
+    if($email != '' && $idNews != ''){
+      $queryCheckDataUser = $this->db->where('EMAIL', $email)->get('mobile_user')->row();
+      $queryCheckDataNews = $this->db->where('ID_NEWS', $idNews)->get('news')->row();
+
+      if($queryCheckDataNews != null && $queryCheckDataUser != null){ //check data email & idNews is found
+        $dataNewsView = array(
+          'EMAIL'       => $email,
+          'ID_NEWS'     => $idNews,
+          'created_at'  => date('Y-m-d H:i:s')
+        );
+
+        $this->db->insert('news_view', $dataNewsView);
+        
+        $this->db->query('UPDATE news SET "VIEWS_COUNT" = "VIEWS_COUNT" + 1 WHERE "ID_NEWS" = '.$idNews); // update news view count on table news
+
+        $this->response(['status' => TRUE, 'message' => 'Data news view berhasil disimpan'], REST_Controller::HTTP_OK);
+      }else{
+        $this->response(['status' => FALSE, 'message' => 'Data user atau news tidak ditemukan'], REST_Controller::HTTP_OK);
+      }
+    }else{
+      $this->response(['status' => FALSE, 'message' => 'Parameter tidak cocok'], REST_Controller::HTTP_OK);
     }
+    
   }
 
   function share_post(){
-    $idnews = $this->post('id_news');
-    $email = $this->post('email');
-    $data = $this->Mnews->clickShare($idnews, $email);
-    if ($data) {
-      $this->response(['status' => TRUE, 'message' => "Shared"], REST_Controller::HTTP_OK);
-    } else {
-      $this->response(['status' => FALSE, 'message' => "Failed"], REST_Controller::HTTP_NOT_FOUND);
+    $email  = $this->post('email');
+    $idNews = $this->post('idNews');
+
+    if($email != '' && $idNews != ''){
+      $queryCheckDataUser = $this->db->where('EMAIL', $email)->get('mobile_user')->row();
+      $queryCheckDataNews = $this->db->where('ID_NEWS', $idNews)->get('news')->row();
+
+      if($queryCheckDataNews != null && $queryCheckDataUser != null){ //check data email & idNews is found
+        $dataNewsShare = array(
+          'EMAIL'       => $email,
+          'ID_NEWS'     => $idNews,
+          'created_at'  => date('Y-m-d H:i:s')
+        );
+
+        $this->db->insert('news_share', $dataNewsShare);
+        
+        $this->db->query('UPDATE news SET "SHARES_COUNT" = "SHARES_COUNT" + 1 WHERE "ID_NEWS" = '.$idNews); // update news share count on table news
+
+        $this->response(['status' => TRUE, 'message' => 'Data news share berhasil disimpan'], REST_Controller::HTTP_OK);
+      }else{
+        $this->response(['status' => FALSE, 'message' => 'Data user atau news tidak ditemukan'], REST_Controller::HTTP_OK);
+      }
+    }else{
+      $this->response(['status' => FALSE, 'message' => 'Parameter tidak cocok'], REST_Controller::HTTP_OK);
     }
   }
 }
