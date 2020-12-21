@@ -18,5 +18,19 @@ class Video extends REST_Controller {
       $this->response(['status' => FALSE,'message' => "data tidak ditemukan"], REST_Controller::HTTP_OK);
     }
   }
+
+  public function detail_get($idVideo){
+    if($idVideo != ''){
+      $queryCheckDataVideo = $this->db->where('ID_VIDEO', $idVideo)->get('video')->row();
+
+      if($queryCheckDataVideo != null){
+        $this->response(['status' => TRUE, 'data' => $queryCheckDataVideo], REST_Controller::HTTP_OK);
+      }else{
+        $this->response(['status' => FALSE, 'message' => 'Data video tidak ditemukan'], REST_Controller::HTTP_OK);
+      }
+    }else{
+      $this->response(['status' => FALSE, 'message' => 'Parameter tidak cocok'], REST_Controller::HTTP_OK);
+    }
+  }
 }
 ?>
