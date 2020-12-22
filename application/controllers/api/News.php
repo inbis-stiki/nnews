@@ -12,14 +12,22 @@ class News extends REST_Controller {
   }
 
   function index_get() {
-
+    $search = $this->get('search');
+    $limit = $this->get('limit');
+    
     $this->db->select('ID_NEWS, NAME_CATEGORY, TITLE_NEWS, NEWS_IMAGE, DATE_NEWS, EDITOR, VERIFICATOR');
     $this->db->where('STATUS', 'published');
+    if($search != ''){ //condition with search title news
+      $this->db->like('TITLE_NEWS', $search);
+    }
+    if($limit != ''){ // condition with limit data
+      $this->db->limit($limit);
+    }
     $this->db->order_by('DATE_NEWS', 'DESC');
 
-    $query = $this->db->get('view_news');
+    $query = $this->db->get('view_news')->result();
     
-    if($query){
+    if($query != null){
       // foreach ($query->result() as $q){
       //   if ($q->NAME_CATEGORY == 'Galeri'){
       //     $images = [];
@@ -34,7 +42,7 @@ class News extends REST_Controller {
       //     }
       //   }
       // }
-      $this->response(['status' => TRUE, 'data' => $query->num_rows() > 0 ? $query->result() : []], REST_Controller::HTTP_OK);
+      $this->response(['status' => TRUE, 'data' => $query], REST_Controller::HTTP_OK);
     }else{
       $this->response(['status' => FALSE, 'message' => "data tidak ditemukan"], REST_Controller::HTTP_OK);
     }
@@ -116,6 +124,22 @@ class News extends REST_Controller {
     // } else {
     //   $this->response(['status' => FALSE, 'message' => "data tidak ditemukan"], REST_Controller::HTTP_OK);
     // }
+  }
+
+  function trending_get(){
+    $limit    = $this->get('limit');
+    if($limit != ''){ // condition with limit data result
+      $this->db->limit($limit);
+    }
+
+    $queryListNewsTrending = $this->db->get('view_news_trending')->result();
+
+    if($queryListNewsTrending != null){
+      $this->response(['status' => TRUE, 'data' => $queryListNewsTrending], REST_Controller::HTTP_OK);
+    }else{
+      $this->response(['status' => FALSE, 'message' => 'Data trending news tidak ditemukan'], REST_Controller::HTTP_OK);
+    }
+
   }
 
   function click_post() {
