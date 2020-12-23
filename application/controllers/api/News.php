@@ -18,7 +18,7 @@ class News extends REST_Controller {
     $this->db->select('ID_NEWS, NAME_CATEGORY, TITLE_NEWS, NEWS_IMAGE, DATE_NEWS, EDITOR, VERIFICATOR');
     $this->db->where('STATUS', 'published');
     if($search != ''){ //condition with search title news
-      $this->db->like('TITLE_NEWS', $search);
+      $this->db->like('LOWER("TITLE_NEWS")', strtolower($search));
     }
     if($limit != ''){ // condition with limit data
       $this->db->limit($limit);
