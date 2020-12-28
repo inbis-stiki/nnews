@@ -11,7 +11,43 @@ class Sadari extends REST_Controller {
   }
 
   public function index_get(){
+    $limit = $this->get('limit');
+    $search = $this->get('search');
+    if($limit != ""){ //condition with limit data 
+        $this->db->limit($limit);
+    }
+    if($search != ''){ //condition with search name 
+        $this->db->like('LOWER("NAME")', strtolower($search));
+      }
+    $this->db->select('ID_SADARI, NAME, EMAIL, DATE_SADARI, IS_INDICATED');
+    $query = $this->db->get('view_sadari')->result();
+    if($query){
+        $this->response(['status' => FALSE, 'data' => $query], REST_Controller::HTTP_OK);
+    }else{
+        $this->response(['status' => FALSE, 'message' => "Data sadari tidak ditemukan"], REST_Controller::HTTP_OK);
+    }
+}
 
+public function detail_get($idSadari){
+    $queryCheckDataSadari = $this->db->where("ID_SADARI", $idSadari)->get("sadari")->row();
+    if($queryCheckDataSadari != null){
+        $queryGetDataSadari     = $this->db->where("ID_SADARI", $idSadari)->get('view_sadari')->result();
+
+        $this->db->select("CONTENT_QUESTION, ANSWER");
+        $queryGetDetailSadari   = $this->db->where("ID_SADARI", $idSadari)->order_by("ID_QUESTION", 'ASC')->get('view_sadari_detail')->result();
+        $resDetailSadari = array(
+            "data_sadari"        => $queryGetDataSadari,
+            "data_sadari_detail" => $queryGetDetailSadari
+        );
+        
+        // $resDetailSadari = $queryCheckDataSadari;
+        // $resDetailSadari['detail_get'] = $queryGetDetailSadari;
+        // $resDetailSadari['detail_sadari'] = $queryGetDetailSadari;
+        // $tes['detail_get'] = $resDetailSadari;
+        $this->response(['status' => FALSE, 'data' => $resDetailSadari], REST_Controller::HTTP_OK);
+    }else{
+        $this->response(['status' => FALSE, 'message' => "Data sadari tidak ditemukan"], REST_Controller::HTTP_OK);
+    }
   }
 
   public function question_get(){
