@@ -8,6 +8,7 @@ class Sadari extends REST_Controller {
   public function __construct() {
     parent::__construct();
     $this->load->helper("url");
+    $this->load->library(array('upload', 'image_lib'));
   }
 
   public function index_get(){
