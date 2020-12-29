@@ -19,10 +19,10 @@ class Sadari extends REST_Controller {
     if($search != ''){ //condition with search name 
         $this->db->like('LOWER("NAME")', strtolower($search));
       }
-    $this->db->select('ID_SADARI, NAME, EMAIL, DATE_SADARI, IS_INDICATED');
+    $this->db->select('ID_SADARI, NAME, EMAIL, DATE_SADARI, IS_CHECKED, IS_INDICATED');
     $query = $this->db->get('view_sadari')->result();
     if($query){
-        $this->response(['status' => FALSE, 'data' => $query], REST_Controller::HTTP_OK);
+        $this->response(['status' => TRUE, 'data' => $query], REST_Controller::HTTP_OK);
     }else{
         $this->response(['status' => FALSE, 'message' => "Data sadari tidak ditemukan"], REST_Controller::HTTP_OK);
     }
@@ -44,7 +44,7 @@ public function detail_get($idSadari){
         // $resDetailSadari['detail_get'] = $queryGetDetailSadari;
         // $resDetailSadari['detail_sadari'] = $queryGetDetailSadari;
         // $tes['detail_get'] = $resDetailSadari;
-        $this->response(['status' => FALSE, 'data' => $resDetailSadari], REST_Controller::HTTP_OK);
+        $this->response(['status' => TRUE, 'data' => $resDetailSadari], REST_Controller::HTTP_OK);
     }else{
         $this->response(['status' => FALSE, 'message' => "Data sadari tidak ditemukan"], REST_Controller::HTTP_OK);
     }
