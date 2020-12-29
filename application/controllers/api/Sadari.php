@@ -146,9 +146,9 @@ public function resultDetail_get($idSadari){
         $config = ['upload_path' => './images/users/', 'allowed_types' => 'jpg|png|jpeg', 'max_size' => 1024];
         
         $this->upload->initialize($config);
-        list($width, $height, $type, $attr) = getimagesize($_FILES['picture']['tmp_name']);
+        list($width, $height, $type, $attr) = getimagesize($_FILES['image1']['tmp_name']);
         if ($width != $height){
-            $config['source_image'] = $_FILES['picture']['tmp_name'];
+            $config['source_image'] = $_FILES['image1']['tmp_name'];
             $config['x_axis'] = ($width-min($width, $height))/2;
             $config['y_axis'] = ($height-min($width, $height))/2;
             $config['maintain_ratio'] = FALSE;
@@ -157,7 +157,7 @@ public function resultDetail_get($idSadari){
             $this->image_lib->initialize($config);
             $this->image_lib->crop();
         }
-        if($this->upload->do_upload('picture')){
+        if($this->upload->do_upload('image1')){
             $upload = $this->upload->data();
             $this->response(['status' => FALSE, 'message' => $_FILES['image1'], 'final' => $upload], REST_Controller::HTTP_OK);
         }else{
