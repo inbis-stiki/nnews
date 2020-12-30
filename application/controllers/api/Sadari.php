@@ -205,7 +205,6 @@ public function resultDetail_get($idSadari){
         $image1 = $_FILES['image1']['tmp_name'];
         $image2 = $_FILES['image2'];
         
-        $this->response(['status' => TRUE, 'message' => $_FILES['image1']], REST_Controller::HTTP_OK);
         // if($idSadariResult != '' && ($image1 != '' || $image2 != '')){
             
         //     $this->response(['status' => TRUE, 'message' => 'Kusam'], REST_Controller::HTTP_OK);
@@ -234,12 +233,12 @@ public function resultDetail_get($idSadari){
         // //     unlink('./images/users/' . explode('/', $check->PROFILEPIC_URL)[3]);
         // //   }
         // // }
-        // if($this->upload->do_upload('image1')){
-        //     $upload = $this->upload->data();
-        //     $this->response(['status' => FALSE, 'message' => $_FILES['image1'], 'final' => $upload], REST_Controller::HTTP_OK);
-        // }else{
-        //     $this->response(['status' => FALSE, 'message' => strip_tags($this->upload->display_errors())], 404);
-        // }
+        if($this->upload->do_upload('image1')){
+            $upload = $this->upload->data();
+            $this->response(['status' => FALSE, 'message' => $_FILES['image1'], 'final' => $upload], REST_Controller::HTTP_OK);
+        }else{
+            $this->response(['status' => FALSE, 'message' => strip_tags($this->upload->display_errors())], 404);
+        }
         // if ($this->upload->do_upload('picture')){
         //   $upload = $this->upload->data();
         //   $this->db->where('EMAIL', $email)->update('user', ['PROFILEPIC_URL' => base_url('images/users/' . $upload['file_name'])]);
