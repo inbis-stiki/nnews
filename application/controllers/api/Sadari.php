@@ -205,7 +205,7 @@ public function resultDetail_get($idSadari){
         // $image1 = $_FILES['image1'];
         // $image2 = $_FILES['image2'];
         
-        if($idSadariResult != '' && (!empty($_FILES('img1')) || !empty($_FILES('img2')))){
+        if($idSadariResult != '' && (!empty($_FILES['img1']) || !empty($_FILES['img2']))){
             $this->response(['status' => TRUE, 'message' => 'Kusam'], REST_Controller::HTTP_OK);
         }else{
             $this->response(['status' => FALSE, 'message' => 'Parameter tidak cocok'], REST_Controller::HTTP_OK);
