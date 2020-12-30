@@ -204,18 +204,12 @@ public function resultDetail_get($idSadari){
         $idSadariResult = $this->post('idSadariResult');
         // $image1 = $_FILES['image1'];
         // $image2 = $_FILES['image2'];
-
-        if(!empty($_FILES['img1'] && $_FILES['img1']['tmp_name'] != '')){
-            $this->response(['status' => TRUE, 'message' => $_FILES['img1']], REST_Controller::HTTP_OK);
-        }else{
-            $this->response(['status' => FALSE, 'message' => $_FILES['img1']], REST_Controller::HTTP_OK);
-        }
         
-        // if($idSadariResult != '' && ($image1 != '' || $image2 != '')){
-        //     $this->response(['status' => TRUE, 'message' => 'Kusam'], REST_Controller::HTTP_OK);
-        // }else{
-        //     $this->response(['status' => FALSE, 'message' => 'Parameter tidak cocok'], REST_Controller::HTTP_OK);
-        // }
+        if($idSadariResult != '' && (!empty($_FILES('img1')) || !empty($_FILES('img2')))){
+            $this->response(['status' => TRUE, 'message' => 'Kusam'], REST_Controller::HTTP_OK);
+        }else{
+            $this->response(['status' => FALSE, 'message' => 'Parameter tidak cocok'], REST_Controller::HTTP_OK);
+        }
         // $config = ['upload_path' => './images/sadariResult/', 'allowed_types' => 'jpg|png|jpeg', 'max_size' => 1024];
         
         // $this->upload->initialize($config);
