@@ -206,12 +206,12 @@ public function resultDetail_get($idSadari){
         $image2 = $_FILES['image2'];
         
         $this->response(['status' => TRUE, 'message' => $image1], REST_Controller::HTTP_OK);
-        if($idSadariResult != '' && ($image1 != '' || $image2 != '')){
+        // if($idSadariResult != '' && ($image1 != '' || $image2 != '')){
             
-            $this->response(['status' => TRUE, 'message' => 'Kusam'], REST_Controller::HTTP_OK);
-        }else{
-            $this->response(['status' => FALSE, 'message' => 'Parameter tidak cocok'], REST_Controller::HTTP_OK);
-        }
+        //     $this->response(['status' => TRUE, 'message' => 'Kusam'], REST_Controller::HTTP_OK);
+        // }else{
+        //     $this->response(['status' => FALSE, 'message' => 'Parameter tidak cocok'], REST_Controller::HTTP_OK);
+        // }
         // $config = ['upload_path' => './images/sadariResult/', 'allowed_types' => 'jpg|png|jpeg', 'max_size' => 1024];
         
         // $this->upload->initialize($config);
