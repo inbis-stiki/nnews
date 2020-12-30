@@ -206,7 +206,61 @@ public function resultDetail_get($idSadari){
         // $image2 = $_FILES['image2'];
         
         if($idSadariResult != '' && (!empty($_FILES['img1']) || !empty($_FILES['img2']))){
-            $this->response(['status' => TRUE, 'message' => 'Kusam'], REST_Controller::HTTP_OK);
+            $queryCheckDataSadariResult = $this->db->where('ID_SADARI_RESULT', $idSadariResult)->get('sadari_result')->row();
+            if($queryCheckDataSadariResult != null){ // check data sadari result is found
+                $config = ['upload_path' => './images/sadariResult/', 'allowed_types' => 'jpg|png|jpeg', 'max_size' => 1024];            
+                $this->upload->initialize($config);
+
+                if(!empty($_FILES['img1']) && $_FILES['img1']['name'] != ''){ // check if data image1 is not null
+                    $check = $this->db->select('IMG1_SADARI_RESULT')->where('ID_SADARI_RESULT', $idSadariResult)->get('sadari_result')->row();
+                    if (isset($check->IMG1_SADARI_RESULT)){ // check if image is found then unlink or remove
+                        if (strpos($check->IMG1_SADARI_RESULT, 'http://') !== false){
+                            unlink('./images/sadariResult/' . explode('/', $check->IMG1_SADARI_RESULT)[5]);
+                        } else {
+                            unlink('./images/sadariResult/' . explode('/', $check->IMG1_SADARI_RESULT)[3]);
+                        }
+                    }
+                    
+                    if($this->upload->do_upload('img1')){
+                        $upload['img1']['data']     = $this->upload->data();
+                        $upload['img1']['status']   = TRUE;
+                        $this->db->where('ID_SADARI_RESULT', $idSadariResult)->update('sadari_result', ['IMG1_SADARI_RESULT' => base_url('images/sadariResult/' . $upload['img1']['data']['file_name'])]);
+                    }else{
+                        $upload['img1']['message'] = strip_tags($this->upload->display_errors());
+                        $upload['img1']['status']  = FALSE;
+                    }
+                }else{
+                    $upload['img1']['data']     = null;
+                    $upload['img1']['status']   = TRUE;
+                }
+                
+                if(!empty($_FILES['img2']) && $_FILES['img2']['name'] != ''){ // check if data image2 is not null
+                    $check = $this->db->select('IMG2_SADARI_RESULT')->where('ID_SADARI_RESULT', $idSadariResult)->get('sadari_result')->row();
+                    if (isset($check->IMG2_SADARI_RESULT)){ // check if image is found then unlink or remove
+                        if (strpos($check->IMG2_SADARI_RESULT, 'http://') !== false){
+                            unlink('./images/sadariResult/' . explode('/', $check->IMG2_SADARI_RESULT)[5]);
+                        } else {
+                            unlink('./images/sadariResult/' . explode('/', $check->IMG2_SADARI_RESULT)[3]);
+                        }
+                    }
+
+                    if($this->upload->do_upload('img2')){
+                        $upload['img2']['data']     = $this->upload->data();
+                        $upload['img2']['status']   = TRUE;
+                        $this->db->where('ID_SADARI_RESULT', $idSadariResult)->update('sadari_result', ['IMG2_SADARI_RESULT' => base_url('images/sadariResult/' . $upload['img2']['data']['file_name'])]);
+                    }else{
+                        $upload['img2']['message']  = strip_tags($this->upload->display_errors());
+                        $upload['img2']['status']   = FALSE;
+                    }
+                }else{
+                    $upload['img2']['data']     = null;
+                    $upload['img2']['status']   = TRUE;
+                }
+
+                $this->response($upload, REST_Controller::HTTP_OK);
+            }else{
+                $this->response(['status' => FALSE, 'message' => 'Data sadari result tidak ditemukan'], REST_Controller::HTTP_OK);
+            }
         }else{
             $this->response(['status' => FALSE, 'message' => 'Parameter tidak cocok'], REST_Controller::HTTP_OK);
         }
