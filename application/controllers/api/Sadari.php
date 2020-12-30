@@ -12,20 +12,63 @@ class Sadari extends REST_Controller {
   }
 
   public function index_get(){
-    $limit = $this->get('limit');
-    $search = $this->get('search');
-    if($limit != ""){ //condition with limit data 
-        $this->db->limit($limit);
-    }
-    if($search != ''){ //condition with search name 
-        $this->db->like('LOWER("NAME")', strtolower($search));
-      }
-    $this->db->select('ID_SADARI, NAME, EMAIL, DATE_SADARI, IS_CHECKED, IS_INDICATED');
-    $query = $this->db->get('view_sadari')->result();
-    if($query){
-        $this->response(['status' => TRUE, 'data' => $query], REST_Controller::HTTP_OK);
+    $email      = $this->get('email');
+    $limit      = $this->get('limit');
+    $search     = $this->get('search');
+    $orderBy    = $this->get('orderBy');
+    
+    if($email != ''){
+        $queryCheckDataUser = $this->db->where('EMAIL', $email)->get('mobile_user')->row();
+        if($queryCheckDataUser != null){ // check data user is found
+            if($queryCheckDataUser->ID_ROLE == '1'){  // if role is user then show sadari by email user
+                if($limit != ""){ //condition with limit data 
+                    $this->db->limit($limit);
+                }
+
+                if($orderBy != ''){ //condition with order_by
+                    $this->db->order_by('DATE_SADARI', $orderBy);
+                }else{
+                    $this->db->order_by('DATE_SADARI', 'desc');
+                }
+                
+                $this->db->select('ID_SADARI, NAME, EMAIL, DATE_SADARI, IS_CHECKED, IS_INDICATED');
+                $this->db->where('EMAIL', $email);
+                $query = $this->db->get('view_sadari')->result();
+                if($query){
+                    $this->response(['status' => TRUE, 'data' => $query], REST_Controller::HTTP_OK);
+                }else{
+                    $this->response(['status' => FALSE, 'message' => "Data sadari tidak ditemukan"], REST_Controller::HTTP_OK);
+                }
+            }else if($queryCheckDataUser->ID_ROLE == '2'){ // if role is doctor then show sadari is indicated
+                if($limit != ""){ //condition with limit data 
+                    $this->db->limit($limit);
+                }
+
+                if($search != ''){ //condition with search name 
+                    $this->db->like('LOWER("NAME")', strtolower($search));
+                }
+                
+                if($orderBy != ''){ //condition with order_by
+                    $this->db->order_by('DATE_SADARI', $orderBy);
+                }else{
+                    $this->db->order_by('DATE_SADARI', 'desc');
+                }
+
+                $this->db->select('ID_SADARI, NAME, EMAIL, DATE_SADARI, IS_CHECKED, IS_INDICATED');
+                $this->db->where('IS_INDICATED', true);
+                $query = $this->db->get('view_sadari')->result();
+                if($query){
+                    $this->response(['status' => TRUE, 'data' => $query], REST_Controller::HTTP_OK);
+                }else{
+                    $this->response(['status' => FALSE, 'message' => "Data sadari tidak ditemukan"], REST_Controller::HTTP_OK);
+                }
+
+            }
+        }else{
+            $this->response(['status' => FALSE, 'message' => "Data user tidak ditemukan"], REST_Controller::HTTP_OK);
+        }
     }else{
-        $this->response(['status' => FALSE, 'message' => "Data sadari tidak ditemukan"], REST_Controller::HTTP_OK);
+        $this->response(['status' => FALSE, 'message' => "Paramter tidak cocok"], REST_Controller::HTTP_OK);
     }
 }
 
@@ -157,12 +200,6 @@ public function resultDetail_get($idSadari){
             $this->image_lib->initialize($config);
             $this->image_lib->crop();
         }
-        if($this->upload->do_upload('image1')){
-            $upload = $this->upload->data();
-            $this->response(['status' => FALSE, 'message' => $_FILES['image1'], 'final' => $upload], REST_Controller::HTTP_OK);
-        }else{
-            $this->response(['status' => FALSE, 'message' => strip_tags($this->upload->display_errors())], 404);
-        }
         // $check = $this->db->select('PROFILEPIC_URL')->where('EMAIL', $email)->get('user')->row();
         // if (isset($check->PROFILEPIC_URL)){
         //   if (strpos($check->PROFILEPIC_URL, 'http://') !== false){
@@ -171,6 +208,12 @@ public function resultDetail_get($idSadari){
         //     unlink('./images/users/' . explode('/', $check->PROFILEPIC_URL)[3]);
         //   }
         // }
+        if($this->upload->do_upload('image1')){
+            $upload = $this->upload->data();
+            $this->response(['status' => FALSE, 'message' => $_FILES['image1'], 'final' => $upload], REST_Controller::HTTP_OK);
+        }else{
+            $this->response(['status' => FALSE, 'message' => strip_tags($this->upload->display_errors())], 404);
+        }
         // if ($this->upload->do_upload('picture')){
         //   $upload = $this->upload->data();
         //   $this->db->where('EMAIL', $email)->update('user', ['PROFILEPIC_URL' => base_url('images/users/' . $upload['file_name'])]);

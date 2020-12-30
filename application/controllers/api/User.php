@@ -85,13 +85,14 @@ class User extends REST_Controller {
   }
 
   public function register_post(){
-    $email    = $this->post('email');
-    $idRole   = $this->post('idRole');
-    $name     = $this->post('name');
-    $password = md5($this->post('password'));
-    $phone    = $this->post('phone');
+    $email      = $this->post('email');
+    $idRole     = $this->post('idRole');
+    $name       = $this->post('name');
+    $dateBirth  = $this->post('dateBirth');
+    $password   = md5($this->post('password'));
+    $phone      = $this->post('phone');
 
-    if($email != '' && $idRole != '' && $name != '' && $password != '' && $phone != ''){ //check param valid
+    if($email != '' && $idRole != '' && $name != '' && $password != '' && $phone != '' && $dateBirth != ''){ //check param valid
       $queryCheckUserIsFound = $this->db->where('EMAIL', $email)->get('mobile_user')->row();
       
       if($queryCheckUserIsFound == null){ // check data if found
@@ -106,6 +107,7 @@ class User extends REST_Controller {
         $dataProfileUser = array(
           'EMAIL'       => $email,
           'PHONE'       => $phone,
+          'DATE_BIRTH'  => $dateBirth,
           'created_at'  => date('Y-m-d H:i:s')
         );
   
