@@ -202,7 +202,7 @@ public function resultDetail_get($idSadari){
     
     public function uploadImage_post(){
         $idSadariResult = $this->post('idSadariResult');
-        $image1 = $_FILES['image1'];
+        $image1 = $_FILES['image1']['tmp_name'];
         $image2 = $_FILES['image2'];
         
         $this->response(['status' => TRUE, 'message' => $image1], REST_Controller::HTTP_OK);
