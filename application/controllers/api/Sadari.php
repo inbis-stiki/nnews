@@ -200,7 +200,7 @@ public function resultDetail_get($idSadari){
         
     }
     
-    public function uploadImage_put(){
+    public function uploadImage_post(){
         $idSadariResult = $this->put('idSadariResult');
         $image1 = $_FILES['image1'];
         $image2 = $_FILES['image2'];
