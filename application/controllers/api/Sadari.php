@@ -171,35 +171,49 @@ public function resultDetail_get($idSadari){
     public function resultDetail_post(){
         $idSadari       = $this->post('idSadari');
         $email          = $this->post('email');
-        $img1           = $this->post('img1');
-        $img2           = $this->post('img2');
         $contentResult  = $this->post('contentResult');
         $dateResult     = $this->post('dateResult');
 
         if($idSadari != '' && $email != '' && $contentResult != '' && $dateResult != ''){
-            $this->response(['status' => TRUE, 'data' => $img1], REST_Controller::HTTP_OK);
+            $queryCheckDataSadari   = $this->db->where('ID_SADARI', $idSadari)->get('sadari')->row();
+            $queryCheckDataUser     = $this->db->where('EMAIL', $email)->get('mobile_user')->row();
+
+            if($queryCheckDataSadari != null && $queryCheckDataUser != null){ // check data user or sadari is found
+                $dataSadariResult = array (
+                    'ID_SADARI'             => $idSadari,
+                    'EMAIL'                 => $email,
+                    'CONTENT_SADARI_RESULT' => $contentResult,
+                    'DATE_SADARI_RESULT'    => $dateResult,
+                    'created_at'            => date("Y-m-d H:i:s")
+                );
+
+                $this->db->insert('sadari_result', $dataSadariResult);
+                $this->response(['status' => TRUE, 'message' => "Data sadari result berhasil disimpan"], REST_Controller::HTTP_OK);
+            }else{
+                $this->response(['status' => FALSE, 'message' => 'Data sadari atau user tidak ditemukan'], REST_Controller::HTTP_OK);
+            }
         }else{
             $this->response(['status' => FALSE, 'message' => 'Parameter tidak cocok'], REST_Controller::HTTP_OK);
         }
         
     }
     
-    public function uploadImage_post(){
+    public function uploadImage_put(){
         $email = $this->post('email');
         $config = ['upload_path' => './images/users/', 'allowed_types' => 'jpg|png|jpeg', 'max_size' => 1024];
         
         $this->upload->initialize($config);
-        list($width, $height, $type, $attr) = getimagesize($_FILES['image1']['tmp_name']);
-        if ($width != $height){
-            $config['source_image'] = $_FILES['image1']['tmp_name'];
-            $config['x_axis'] = ($width-min($width, $height))/2;
-            $config['y_axis'] = ($height-min($width, $height))/2;
-            $config['maintain_ratio'] = FALSE;
-            $config['width'] = min($width, $height);
-            $config['height'] = min($width, $height);
-            $this->image_lib->initialize($config);
-            $this->image_lib->crop();
-        }
+        // list($width, $height, $type, $attr) = getimagesize($_FILES['image1']['tmp_name']);
+        // if ($width != $height){
+        //     $config['source_image'] = $_FILES['image1']['tmp_name'];
+        //     $config['x_axis'] = ($width-min($width, $height))/2;
+        //     $config['y_axis'] = ($height-min($width, $height))/2;
+        //     $config['maintain_ratio'] = FALSE;
+        //     $config['width'] = min($width, $height);
+        //     $config['height'] = min($width, $height);
+        //     $this->image_lib->initialize($config);
+        //     $this->image_lib->crop();
+        // }
         // $check = $this->db->select('PROFILEPIC_URL')->where('EMAIL', $email)->get('user')->row();
         // if (isset($check->PROFILEPIC_URL)){
         //   if (strpos($check->PROFILEPIC_URL, 'http://') !== false){
