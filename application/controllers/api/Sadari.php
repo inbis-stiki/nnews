@@ -200,17 +200,16 @@ public function resultDetail_get($idSadari){
         
     }
     
-    public function uploadImage_post(){
-        $idSadariResult = $this->post('idSadariResult');
-        $image1 = $_FILES['image1']['tmp_name'];
+    public function uploadImage_put(){
+        $idSadariResult = $this->put('idSadariResult');
+        $image1 = $_FILES['image1'];
         $image2 = $_FILES['image2'];
         
-        // if($idSadariResult != '' && ($image1 != '' || $image2 != '')){
-            
-        //     $this->response(['status' => TRUE, 'message' => 'Kusam'], REST_Controller::HTTP_OK);
-        // }else{
-        //     $this->response(['status' => FALSE, 'message' => 'Parameter tidak cocok'], REST_Controller::HTTP_OK);
-        // }
+        if($idSadariResult != '' && ($image1 != '' || $image2 != '')){
+            $this->response(['status' => TRUE, 'message' => 'Kusam'], REST_Controller::HTTP_OK);
+        }else{
+            $this->response(['status' => FALSE, 'message' => 'Parameter tidak cocok'], REST_Controller::HTTP_OK);
+        }
         // $config = ['upload_path' => './images/sadariResult/', 'allowed_types' => 'jpg|png|jpeg', 'max_size' => 1024];
         
         // $this->upload->initialize($config);
@@ -233,12 +232,12 @@ public function resultDetail_get($idSadari){
         // //     unlink('./images/users/' . explode('/', $check->PROFILEPIC_URL)[3]);
         // //   }
         // // }
-        if($this->upload->do_upload('image1')){
-            $upload = $this->upload->data();
-            $this->response(['status' => FALSE, 'message' => $_FILES['image1'], 'final' => $upload], REST_Controller::HTTP_OK);
-        }else{
-            $this->response(['status' => FALSE, 'message' => strip_tags($this->upload->display_errors())], 404);
-        }
+        // if($this->upload->do_upload('image1')){
+        //     $upload = $this->upload->data();
+        //     $this->response(['status' => FALSE, 'message' => $_FILES['image1'], 'final' => $upload], REST_Controller::HTTP_OK);
+        // }else{
+        //     $this->response(['status' => FALSE, 'message' => strip_tags($this->upload->display_errors())], 404);
+        // }
         // if ($this->upload->do_upload('picture')){
         //   $upload = $this->upload->data();
         //   $this->db->where('EMAIL', $email)->update('user', ['PROFILEPIC_URL' => base_url('images/users/' . $upload['file_name'])]);
