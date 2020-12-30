@@ -205,7 +205,7 @@ public function resultDetail_get($idSadari){
         // $image1 = $_FILES['image1'];
         // $image2 = $_FILES['image2'];
 
-        if(!empty($_FILES['img1'] && $_FILES['img']['tmp_name'] != '')){
+        if(!empty($_FILES['img1'] && $_FILES['img1']['tmp_name'] != '')){
             $this->response(['status' => TRUE, 'message' => $_FILES['img1']], REST_Controller::HTTP_OK);
         }else{
             $this->response(['status' => FALSE, 'message' => $_FILES['img1']], REST_Controller::HTTP_OK);
