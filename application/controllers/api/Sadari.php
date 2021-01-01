@@ -94,11 +94,11 @@ public function detail_get($idSadari){
     }
 }
 
-public function resultDetail_get($idSadari){
-    $queryCheckDataSadari = $this->db->where('ID_SADARI', $idSadari)->get('sadari')->row();
+public function resultDetail_get($idSadariResult){
+    $queryCheckDataSadari = $this->db->where('ID_SADARI_RESULT', $idSadariResult)->get('sadari_result')->row();
     if($queryCheckDataSadari != null){ // check data sadari is found
         $this->db->select('DOCTOR_NAME, DOCTOR_EMAIL, IMG1_SADARI_RESULT, IMG2_SADARI_RESULT, CONTENT_SADARI_RESULT, DATE_SADARI_RESULT');
-        $queryGetDataSadariResult = $this->db->where('ID_SADARI', $idSadari)->get('view_sadari_result')->row();
+        $queryGetDataSadariResult = $this->db->where('ID_SADARI_RESULT', $idSadariResult)->get('view_sadari_result')->row();
         if($queryGetDataSadariResult != null){ // check data sadari result is found
             $this->response(['status' => TRUE, 'data' => $queryGetDataSadariResult], REST_Controller::HTTP_OK);
         }else{
@@ -179,6 +179,11 @@ public function resultDetail_get($idSadari){
             $queryCheckDataUser     = $this->db->where('EMAIL', $email)->get('mobile_user')->row();
 
             if($queryCheckDataSadari != null && $queryCheckDataUser != null){ // check data user or sadari is found
+                $dataSadari = array(
+                    'IS_CHECKED'  => true,
+                    'updated_at'  => date('Y-m-d H:i:s')
+                );
+                
                 $dataSadariResult = array (
                     'ID_SADARI'             => $idSadari,
                     'EMAIL'                 => $email,
@@ -186,6 +191,8 @@ public function resultDetail_get($idSadari){
                     'DATE_SADARI_RESULT'    => $dateResult,
                     'created_at'            => date("Y-m-d H:i:s")
                 );
+                
+                $this->db->where('ID_SADARI', $idSadari)->update('sadari', $dataSadari); // update is_indicated to true on sadari table
 
                 $this->db->insert('sadari_result', $dataSadariResult);
                 $resIdSadariResult["ID_SADARI_RESULT"] = $this->db->insert_id();

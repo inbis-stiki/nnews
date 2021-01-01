@@ -169,5 +169,58 @@ class User extends REST_Controller {
       $this->response(['status' => FALSE, 'message' => "Gagal"], 502);
     }
   }
+  
+  public function profile_put() {
+    $email      = $this->put('email');
+    $name       = $this->put('name');
+    $dateBirth  = $this->put('dateBirth');
+    $phone      = $this->put('phone');
+    
+    if($email != '' && $name != '' && $dateBirth != '' && $phone != ''){
+      $queryCheckUserIsFound = $this->db->where('EMAIL', $email)->get('mobile_user')->row();
+      if($queryCheckUserIsFound != null){ // check data user is found
+        $dataProfileUser = array(
+          'DATE_BIRTH' => $dateBirth,
+          'PHONE'      => $phone,
+          'updated_at'  => date('Y-m-d H:i:s')
+        );
+        $dataUser = array(
+          'NAME'       => $name,
+          'updated_at'  => date('Y-m-d H:i:s')
+        );
+        
+        $this->db->where('EMAIL', $email)->update('mobile_user', $dataUser);
+        $this->db->where('EMAIL', $email)->update('profile_user', $dataProfileUser);
+        
+        $this->response(['status' => TRUE, 'message' => "Data profile user berhasil diubah"], REST_Controller::HTTP_OK);
+      }else{
+        $this->response(['status' => FALSE, 'message' => "Data user tidak ditemukan"], REST_Controller::HTTP_OK);
+      }
+    }else{
+      $this->response(['status' => FALSE, 'message' => "Parameter tidak cocok"], REST_Controller::HTTP_OK);
+    }
+  }
+  
+  public function password_put(){
+    $email    = $this->put('email');
+    $password = $this->put('password');
+    if($email != '' && $password != ''){
+      $queryCheckUserIsFound = $this->db->where('EMAIL', $email)->get('mobile_user')->row();
+      if($queryCheckUserIsFound != null){ // check data user is found
+        $dataUser = array(
+          'PASSWORD'    => md5($password),
+          'updated_at'  => date('Y-m-d H:i:s')
+        );
+
+        $this->db->where('EMAIL', $email)->update('mobile_user', $dataUser);
+
+        $this->response(['status' => TRUE, 'message' => "Password user berhasil diubah"], REST_Controller::HTTP_OK);
+      }else{
+        $this->response(['status' => FALSE, 'message' => "Data user tidak ditemukan"], REST_Controller::HTTP_OK);
+      }
+    }else{
+      $this->response(['status' => FALSE, 'message' => "Parameter tidak cocok"], REST_Controller::HTTP_OK);
+    }
+  }
 }
 ?>
