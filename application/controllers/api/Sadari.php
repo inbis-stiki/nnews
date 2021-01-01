@@ -94,11 +94,11 @@ public function detail_get($idSadari){
     }
 }
 
-public function resultDetail_get($idSadariResult){
-    $queryCheckDataSadari = $this->db->where('ID_SADARI_RESULT', $idSadariResult)->get('sadari_result')->row();
+public function resultDetail_get($idSadari){
+    $queryCheckDataSadari = $this->db->where('ID_SADARI', $idSadari)->get('sadari_result')->row();
     if($queryCheckDataSadari != null){ // check data sadari is found
         $this->db->select('DOCTOR_NAME, DOCTOR_EMAIL, IMG1_SADARI_RESULT, IMG2_SADARI_RESULT, CONTENT_SADARI_RESULT, DATE_SADARI_RESULT');
-        $queryGetDataSadariResult = $this->db->where('ID_SADARI_RESULT', $idSadariResult)->get('view_sadari_result')->row();
+        $queryGetDataSadariResult = $this->db->where('ID_SADARI', $idSadari)->order_by('DATE_SADARI_RESULT', 'desc')->get('view_sadari_result')->row();
         if($queryGetDataSadariResult != null){ // check data sadari result is found
             $this->response(['status' => TRUE, 'data' => $queryGetDataSadariResult], REST_Controller::HTTP_OK);
         }else{

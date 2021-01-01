@@ -70,7 +70,7 @@ class User extends REST_Controller {
       $queryCheckValidUser  = $this->db->get('mobile_user')->row();
       
       if($queryCheckValidUser != null){
-        $this->db->select('EMAIL, NAME, NAME_ROLE, PROFILEPIC_USER, PHONE, DATE_BIRTH, GENDER');
+        $this->db->select('EMAIL, NAME, NAME_ROLE, PROFILEPIC_USER, PHONE, DATE_BIRTH');
         $condition = array('EMAIL' => $email, 'PASSWORD' => md5($password));
         $this->db->where($condition);
         $queryGetDataUser = $this->db->get('view_mobile_user')->row();
