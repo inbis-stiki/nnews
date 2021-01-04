@@ -224,7 +224,6 @@ public function resultDetail_get($idSadari){
                     if($this->upload->do_upload('img1')){
                         $dataUpload                 = $this->upload->data();
                         $upload['img1']['status']   = TRUE;
-                        $upload['img1']['dataUrl']  = base_url('images/sadariResult/' . $dataUpload['file_name']);
                         $upload['img1']['message']  = 'Data image berhasil diupload';
                         $this->db->where('ID_SADARI_RESULT', $idSadariResult)->update('sadari_result', ['IMG1_SADARI_RESULT' => base_url('images/sadariResult/' . $dataUpload['file_name'])]);
                     }else{
@@ -233,7 +232,6 @@ public function resultDetail_get($idSadari){
                     }
                 }else{
                     $upload['img1']['status']   = TRUE;
-                    $upload['img1']['dataUrl']  = null;
                     $upload['img1']['message']  = "Data tidak ada yang diupdate / diupload";
                 }
                 
@@ -245,7 +243,6 @@ public function resultDetail_get($idSadari){
                     if($this->upload->do_upload('img2')){
                         $dataUpload                 = $this->upload->data();
                         $upload['img2']['status']   = TRUE;
-                        $upload['img2']['dataUrl']  = base_url('images/sadariResult/' . $dataUpload['file_name']);
                         $upload['img2']['message']  = "Data image berhasil diupload";
                         $this->db->where('ID_SADARI_RESULT', $idSadariResult)->update('sadari_result', ['IMG2_SADARI_RESULT' => base_url('images/sadariResult/' . $dataUpload['file_name'])]);
                     }else{
@@ -254,7 +251,6 @@ public function resultDetail_get($idSadari){
                     }
                 }else{
                     $upload['img2']['status']   = TRUE;
-                    $upload['img2']['dataUrl']  = null;
                     $upload['img2']['message']  = "Data tidak ada yang diupdate / diupload";
                 }
 

@@ -139,7 +139,6 @@ class User extends REST_Controller {
               if($this->upload->do_upload('avatar')){
                   $dataUpload                   = $this->upload->data();
                   $upload['avatar']['status']   = TRUE;
-                  $upload['avatar']['dataUrl']  = base_url('images/users/' . $dataUpload['file_name']);
                   $upload['avatar']['message']  = 'Data avatar berhasil diupload';
                   $this->db->where('EMAIL', $email)->update('profile_user', ['PROFILEPIC_USER' => base_url('images/users/' . $dataUpload['file_name'])]);
               }else{
@@ -148,7 +147,6 @@ class User extends REST_Controller {
               }
           }else{
               $upload['avatar']['status']   = TRUE;
-              $upload['avatar']['dataUrl']  = null;
               $upload['avatar']['message']  = "Data avatar tidak ada yang diupdate / diupload";
           }
 
