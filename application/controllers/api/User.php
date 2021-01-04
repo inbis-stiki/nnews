@@ -151,6 +151,8 @@ class User extends REST_Controller {
               $upload['avatar']['dataUrl']  = null;
               $upload['avatar']['message']  = "Data avatar tidak ada yang diupdate / diupload";
           }
+          
+          $this->response($upload, REST_Controller::HTTP_OK);
       }else{
         $this->response(['status' => FALSE, 'message' => "Data user tidak ditemukan"], REST_Controller::HTTP_OK);
       }
