@@ -126,7 +126,7 @@ class User extends REST_Controller {
   public function avatar_post(){
     $email = $this->post('email');
     if($email != '' && !empty($_FILES['avatar'])){
-      $queryCheckUserIsFound = $this->db->where('EMAIL', $email)->get('mobile_user')->row();
+      $queryCheckUserIsFound = $this->db->where('EMAIL', $email)->get('profile_user')->row();
       if($queryCheckUserIsFound != null){
         $config = ['upload_path' => './images/users/', 'allowed_types' => 'jpg|png|jpeg', 'max_size' => 1024];            
           $this->upload->initialize($config);
