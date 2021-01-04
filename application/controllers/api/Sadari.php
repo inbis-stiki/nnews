@@ -207,10 +207,8 @@ public function resultDetail_get($idSadari){
         
     }
     
-    public function uploadImage_post(){
+    public function image_post(){
         $idSadariResult = $this->post('idSadariResult');
-        // $image1 = $_FILES['image1'];
-        // $image2 = $_FILES['image2'];
         
         if($idSadariResult != '' && (!empty($_FILES['img1']) || !empty($_FILES['img2']))){
             $queryCheckDataSadariResult = $this->db->where('ID_SADARI_RESULT', $idSadariResult)->get('sadari_result')->row();
