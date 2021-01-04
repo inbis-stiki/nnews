@@ -221,11 +221,18 @@ public function resultDetail_get($idSadari){
                 if(!empty($_FILES['img1']) && $_FILES['img1']['name'] != ''){ // check if data image1 is not null
                     $check = $this->db->select('IMG1_SADARI_RESULT')->where('ID_SADARI_RESULT', $idSadariResult)->get('sadari_result')->row();
                     if (isset($check->IMG1_SADARI_RESULT)){ // check if image is found then unlink or remove
-                        if (strpos($check->IMG1_SADARI_RESULT, 'http://') !== false){
-                            unlink('./images/sadariResult/' . explode('/', $check->IMG1_SADARI_RESULT)[5]);
-                        } else {
-                            unlink('./images/sadariResult/' . explode('/', $check->IMG1_SADARI_RESULT)[3]);
-                        }
+                        print_r("IMG1_SADARI_RESULT = ". $check->IMG1_SADARI_RESULT);
+                        print_r("STRPOS = ". strpos('http://', $check->IMG1_SADARI_RESULT));
+                        print_r("UNLINK(5) = ". './images/sadariResult/' . explode('/', $check->IMG1_SADARI_RESULT)[5]);
+                        print_r("UNLINK(3) = ". './images/sadariResult/' . explode('/', $check->IMG1_SADARI_RESULT)[3]);
+
+
+                        
+                        // if (strpos($check->IMG1_SADARI_RESULT, 'http://') !== false){
+                        //     unlink('./images/sadariResult/' . explode('/', $check->IMG1_SADARI_RESULT)[5]);
+                        // } else {
+                        //     unlink('./images/sadariResult/' . explode('/', $check->IMG1_SADARI_RESULT)[3]);
+                        // }
                     }
                     
                     // if($this->upload->do_upload('img1')){
