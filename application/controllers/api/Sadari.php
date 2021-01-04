@@ -228,15 +228,15 @@ public function resultDetail_get($idSadari){
                         }
                     }
                     
-                    if($this->upload->do_upload('img1')){
-                        $upload['img1']['data']     = $this->upload->data();
-                        $upload['img1']['dataUrl']  = base_url('images/sadariResult/' . $upload['img1']['data']['file_name']);
-                        $upload['img1']['status']   = TRUE;
-                        $this->db->where('ID_SADARI_RESULT', $idSadariResult)->update('sadari_result', ['IMG1_SADARI_RESULT' => base_url('images/sadariResult/' . $upload['img1']['data']['file_name'])]);
-                    }else{
-                        $upload['img1']['message'] = strip_tags($this->upload->display_errors());
-                        $upload['img1']['status']  = FALSE;
-                    }
+                    // if($this->upload->do_upload('img1')){
+                    //     $upload['img1']['data']     = $this->upload->data();
+                    //     $upload['img1']['dataUrl']  = base_url('images/sadariResult/' . $upload['img1']['data']['file_name']);
+                    //     $upload['img1']['status']   = TRUE;
+                    //     $this->db->where('ID_SADARI_RESULT', $idSadariResult)->update('sadari_result', ['IMG1_SADARI_RESULT' => base_url('images/sadariResult/' . $upload['img1']['data']['file_name'])]);
+                    // }else{
+                    //     $upload['img1']['message'] = strip_tags($this->upload->display_errors());
+                    //     $upload['img1']['status']  = FALSE;
+                    // }
                 }else{
                     $upload['img1']['dataUrl']  = null;
                     $upload['img1']['status']   = TRUE;
@@ -252,15 +252,15 @@ public function resultDetail_get($idSadari){
                         }
                     }
 
-                    if($this->upload->do_upload('img2')){
-                        $upload['img2']['data']     = $this->upload->data();
-                        $upload['img2']['dataUrl']  = base_url('images/sadariResult/' . $upload['img2']['data']['file_name']);
-                        $upload['img2']['status']   = TRUE;
-                        $this->db->where('ID_SADARI_RESULT', $idSadariResult)->update('sadari_result', ['IMG2_SADARI_RESULT' => base_url('images/sadariResult/' . $upload['img2']['data']['file_name'])]);
-                    }else{
-                        $upload['img2']['message']  = strip_tags($this->upload->display_errors());
-                        $upload['img2']['status']   = FALSE;
-                    }
+                    // if($this->upload->do_upload('img2')){
+                    //     $upload['img2']['data']     = $this->upload->data();
+                    //     $upload['img2']['dataUrl']  = base_url('images/sadariResult/' . $upload['img2']['data']['file_name']);
+                    //     $upload['img2']['status']   = TRUE;
+                    //     $this->db->where('ID_SADARI_RESULT', $idSadariResult)->update('sadari_result', ['IMG2_SADARI_RESULT' => base_url('images/sadariResult/' . $upload['img2']['data']['file_name'])]);
+                    // }else{
+                    //     $upload['img2']['message']  = strip_tags($this->upload->display_errors());
+                    //     $upload['img2']['status']   = FALSE;
+                    // }
                 }else{
                     $upload['img2']['dataUrl']  = null;
                     $upload['img2']['status']   = TRUE;
