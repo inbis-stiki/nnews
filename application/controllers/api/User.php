@@ -132,7 +132,7 @@ class User extends REST_Controller {
           $this->upload->initialize($config);
 
           if(!empty($_FILES['avatar']) && $_FILES['avatar']['name'] != ''){ // check if data image1 is not null
-              $check = $this->db->select('PROFILEPIC_USER')->where('EMAIL', $email)->get('sadari_result')->row();
+              $check = $this->db->select('PROFILEPIC_USER')->where('EMAIL', $email)->get('profile_user')->row();
               if (isset($check->PROFILEPIC_USER)){ // check if image is found then unlink or remove
                   unlink('./images/users/' . explode('/', $check->PROFILEPIC_USER)[5]);
               }
@@ -151,7 +151,7 @@ class User extends REST_Controller {
               $upload['avatar']['dataUrl']  = null;
               $upload['avatar']['message']  = "Data avatar tidak ada yang diupdate / diupload";
           }
-          
+
           $this->response($upload, REST_Controller::HTTP_OK);
       }else{
         $this->response(['status' => FALSE, 'message' => "Data user tidak ditemukan"], REST_Controller::HTTP_OK);
