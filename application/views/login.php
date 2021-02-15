@@ -19,7 +19,7 @@
             </div>
             <div class="row">
                 <div class="mx-auto col-10 bg-white border border-success col-md-4 p-3">
-                    <h1 class="mb-4">Masuk</h1>
+                    <h1 class="mb-4">Masukkk</h1>
                     <?php if ($this->session->flashdata('error_login')){ ?>
                     <div class="alert alert-danger" role="alert">
                         <button type="button" class="close" data-dismiss="alert">×</button>
