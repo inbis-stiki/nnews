@@ -26,7 +26,7 @@
 <body>
 	<div class="d-flex" id="wrapper">
 		<nav class="bg-light border-right" id="sidebar-wrapper">
-			<div class="sidebar-heading">Mamo APP </div>
+			<div class="sidebar-heading">Mamo App </div>
 			<div class="list-group list-group-flush">
 				<a href="<?= base_url(); ?>" class="list-group-item list-group-item-action bg-light">Dashboard</a>
 				<a href="<?= base_url('news'); ?>" class="list-group-item list-group-item-action bg-light">Berita</a>

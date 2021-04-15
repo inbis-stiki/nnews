@@ -167,7 +167,7 @@ class News extends CI_Controller {
       $applications = $this->Mnotifications->getAllDevice();
 			foreach ($applications as $app){
 				$this->notification->setTitle($news->TITLE_NEWS);
-				$this->notification->setMessage("Digimagz PTPN X");
+				$this->notification->setMessage("Mamo App");
 				$this->notification->setId_news($id_news);
 				$request_data = $this->notification->getNotifications();
 				$this->notification->pushNotification($app->TOKEN, $request_data);
