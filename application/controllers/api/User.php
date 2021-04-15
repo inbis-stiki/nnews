@@ -254,5 +254,9 @@ class User extends REST_Controller {
       $this->response(['status' => FALSE, 'message' => "Parameter tidak cocok"], REST_Controller::HTTP_OK);
     }
   }
+  public function registerToken_post(){
+    $this->db->insert('firebase_token', ['TOKEN' => $this->post('token')]);
+    $this->response(['status' => TRUE, 'message' => "Berhasil mendaftarkan token"], REST_Controller::HTTP_OK);
+  }
 }
 ?>
