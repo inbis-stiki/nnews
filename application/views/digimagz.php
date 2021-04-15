@@ -17,14 +17,14 @@
           </div>
         </div>
       </div>
-      <div class="col-md-3">
+      <!-- <div class="col-md-3">
         <div class="card text-white mb-3 bg-dark">
           <div class="card-body">
             <p class="display-4 counter" data-count="<?php echo $stats['gallery'] ?>"></p>
             <div><i class="fa fa-image"></i><p style="display: inline-block">&ensp;Galeri</p></div>
           </div>
         </div>
-      </div>
+      </div> -->
       <div class="col-md-3">
         <div class="card text-white mb-3 bg-primary">
           <div class="card-body">
@@ -41,14 +41,14 @@
           </div>
         </div>
       </div>
-      <div class="col-md-3">
+      <!-- <div class="col-md-3">
         <div class="card text-white mb-3 bg-secondary">
           <div class="card-body">
             <p class="display-4 counter" data-count="<?php echo $stats['emagz'] ?>"></p>
             <div><i class="fa fa-file"></i><p style="display: inline-block">&ensp;E-Magazine</p></div>
           </div>
         </div>
-      </div>
+      </div> -->
       <div class="col-md-3">
         <div class="card text-white mb-3 bg-info">
           <div class="card-body">

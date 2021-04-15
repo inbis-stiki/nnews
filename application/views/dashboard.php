@@ -26,19 +26,19 @@
 <body>
 	<div class="d-flex" id="wrapper">
 		<nav class="bg-light border-right" id="sidebar-wrapper">
-			<div class="sidebar-heading">DigiMagz PTPN X </div>
+			<div class="sidebar-heading">Mamo APP </div>
 			<div class="list-group list-group-flush">
 				<a href="<?= base_url(); ?>" class="list-group-item list-group-item-action bg-light">Dashboard</a>
 				<a href="<?= base_url('news'); ?>" class="list-group-item list-group-item-action bg-light">Berita</a>
 				<a href="<?= base_url('video'); ?>" class="list-group-item list-group-item-action bg-light">Video</a>
-        <a href="<?= base_url('gallery'); ?>" class="list-group-item list-group-item-action bg-light">Galeri</a>
+        <!-- <a href="<?= base_url('gallery'); ?>" class="list-group-item list-group-item-action bg-light">Galeri</a> -->
         <?php if ($this->session->userdata('role') == 'admin'){ ?>
           <a href="<?= base_url('user'); ?>" class="list-group-item list-group-item-action bg-light">Manajemen Mobile User</a>
           <a href="<?= base_url('backend'); ?>" class="list-group-item list-group-item-action bg-light">Manajemen Backend User</a>
-          <a href="<?= base_url('comment'); ?>" class="list-group-item list-group-item-action bg-light">Manajemen Komentar</a>
+          <!-- <a href="<?= base_url('comment'); ?>" class="list-group-item list-group-item-action bg-light">Manajemen Komentar</a> -->
         <?php } ?>
-				<a href="<?= base_url('coverstory'); ?>" class="list-group-item list-group-item-action bg-light">Cover Story</a>
-				<a href="<?= base_url('emagz'); ?>" class="list-group-item list-group-item-action bg-light">E-Magazine</a>
+				<!-- <a href="<?= base_url('coverstory'); ?>" class="list-group-item list-group-item-action bg-light">Cover Story</a> -->
+				<!-- <a href="<?= base_url('emagz'); ?>" class="list-group-item list-group-item-action bg-light">E-Magazine</a> -->
 				<a href="<?= base_url('tags'); ?>" class="list-group-item list-group-item-action bg-light">Tag</a>
 			</div>
 		</nav>
