@@ -34,8 +34,8 @@
               <tr>
                 <th class="text-center">Email</th>
                 <th class="text-center">Nama</th>
-                <th class="text-center">Login Terakhir</th>
-                <th class="text-center">Tipe User</th>
+                <!-- <th class="text-center">Login Terakhir</th>
+                <th class="text-center">Tipe User</th> -->
                 <!-- <th class="text-center" style="width: 50px">Aksi</th> -->
               </tr>
             </thead>
@@ -43,9 +43,9 @@
             <?php foreach ($users as $u){ ?>
               <tr>
                 <td><?= $u->EMAIL ?></td>
-                <td><?= $u->USER_NAME ?></td>
-                <td><?= tgl_indo($u->LAST_LOGIN) ?></td>
-                <td><?= $u->USER_TYPE ?></td>
+                <td><?= $u->NAME ?></td>
+                <!-- <td><?= tgl_indo($u->LAST_LOGIN) ?></td>
+                <td><?= $u->USER_TYPE ?></td> -->
                 <!-- <td class="text-center">
 
                 </td> -->

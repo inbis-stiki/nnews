@@ -6,7 +6,7 @@ class Muser extends CI_Model {
   }
   
   public function getAllUsers(){
-    return $this->db->get('user')->result();
+    return $this->db->get('mobile_user')->result();
   }
 
   public function loadAllUserDatas($users){

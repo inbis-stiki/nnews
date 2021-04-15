@@ -15,7 +15,7 @@ class App_model extends CI_Model{
     $news_count = $this->db->where('STATUS', 'published')->where_in('ID_CATEGORY', ['B', 'A'])->get('news')->num_rows();
     $gallery_count = $this->db->where('STATUS', 'published')->where('ID_CATEGORY', 'G')->get('news')->num_rows();
     $videos = $this->db->where('STATUS_PUBLISHED', TRUE)->get('video')->num_rows();
-    $users = $this->db->get('user')->num_rows();
+    $users = $this->db->get('mobile_user')->num_rows();
     $emagz = $this->db->get('emagz')->num_rows();
     return array(
       'views' => $news_stats_count['views'],

@@ -14,11 +14,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <img class="d-block img-fluid mx-auto" src="<?= base_url('assets/image/logo.png') ?>" width="200">
+                    <img class="d-block img-fluid mx-auto" src="<?= base_url('assets/image/logo.png') ?>" width="100">
                 </div>
             </div>
             <div class="row">
-                <div class="mx-auto col-10 bg-white border border-primary col-md-4 p-3">
+                <div class="mx-auto col-10 bg-white border border-pink col-md-4 p-3">
                     <h1 class="mb-4">Masuk</h1>
                     <?php if ($this->session->flashdata('error_login')){ ?>
                     <div class="alert alert-danger" role="alert">
