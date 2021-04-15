@@ -14,7 +14,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <img class="d-block img-fluid mx-auto" src="<?= base_url('assets/image/logo.png') ?>" width="150" style="margin-bottom: 25px;">
+                    <img class="d-block img-fluid mx-auto" src="<?= base_url('assets/image/logo.png') ?>" width="150" style="margin-top: 25px; margin-bottom: 25px;">
                 </div>
             </div>
             <div class="row">
