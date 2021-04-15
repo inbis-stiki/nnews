@@ -207,7 +207,62 @@ public function resultDetail_get($idSadari){
         
     }
     
-    public function image_post(){
+    public function imageSadari_post(){
+        $idSadari = $this->post('idSadari');
+        
+        if($idSadari != '' && (!empty($_FILES['img1']) || !empty($_FILES['img2']))){
+            $queryCheckDataSadari = $this->db->where('ID_SADARI', $idSadari)->get('sadari')->row();
+            if($queryCheckDataSadari != null){ // check data sadari result is found
+                $config = ['upload_path' => './images/sadari/', 'allowed_types' => 'jpg|png|jpeg', 'max_size' => 1024];            
+                $this->upload->initialize($config);
+
+                if(!empty($_FILES['img1']) && $_FILES['img1']['name'] != ''){ // check if data image1 is not null
+                    $check = $this->db->select('IMG1_SADARI')->where('ID_SADARI', $idSadari)->get('sadari')->row();
+                    if (isset($check->IMG1_SADARI)){ // check if image is found then unlink or remove
+                        unlink('./images/sadari/' . explode('/', $check->IMG1_SADARI)[5]);
+                    }
+                    if($this->upload->do_upload('img1')){
+                        $dataUpload                 = $this->upload->data();
+                        $upload['img1']['status']   = TRUE;
+                        $upload['img1']['message']  = 'Data image berhasil diupload';
+                        $this->db->where('ID_SADARI', $idSadari)->update('sadari', ['IMG1_SADARI' => base_url('images/sadari/' . $dataUpload['file_name'])]);
+                    }else{
+                        $upload['img1']['status']  = FALSE;
+                        $upload['img1']['message'] = strip_tags($this->upload->display_errors());
+                    }
+                }else{
+                    $upload['img1']['status']   = TRUE;
+                    $upload['img1']['message']  = "Data tidak ada yang diupdate / diupload";
+                }
+                
+                if(!empty($_FILES['img2']) && $_FILES['img2']['name'] != ''){ // check if data image2 is not null
+                    $check = $this->db->select('IMG2_SADARI')->where('ID_SADARI', $idSadari)->get('sadari')->row();
+                    if (isset($check->IMG2_SADARI)){ // check if image is found then unlink or remove
+                        unlink('./images/sadari/' . explode('/', $check->IMG2_SADARI)[5]);
+                    }
+                    if($this->upload->do_upload('img2')){
+                        $dataUpload                 = $this->upload->data();
+                        $upload['img2']['status']   = TRUE;
+                        $upload['img2']['message']  = "Data image berhasil diupload";
+                        $this->db->where('ID_SADARI', $idSadari)->update('sadari', ['IMG2_SADARI' => base_url('images/sadari/' . $dataUpload['file_name'])]);
+                    }else{
+                        $upload['img2']['status']   = FALSE;
+                        $upload['img2']['message']  = strip_tags($this->upload->display_errors());
+                    }
+                }else{
+                    $upload['img2']['status']   = TRUE;
+                    $upload['img2']['message']  = "Data tidak ada yang diupdate / diupload";
+                }
+
+                $this->response($upload, REST_Controller::HTTP_OK);
+            }else{
+                $this->response(['status' => FALSE, 'message' => 'Data sadari tidak ditemukan'], REST_Controller::HTTP_OK);
+            }
+        }else{
+            $this->response(['status' => FALSE, 'message' => 'Parameter tidak cocok'], REST_Controller::HTTP_OK);
+        }
+      } 
+    public function imageSadariResult_post(){
         $idSadariResult = $this->post('idSadariResult');
         
         if($idSadariResult != '' && (!empty($_FILES['img1']) || !empty($_FILES['img2']))){
@@ -261,41 +316,6 @@ public function resultDetail_get($idSadari){
         }else{
             $this->response(['status' => FALSE, 'message' => 'Parameter tidak cocok'], REST_Controller::HTTP_OK);
         }
-        // $config = ['upload_path' => './images/sadariResult/', 'allowed_types' => 'jpg|png|jpeg', 'max_size' => 1024];
-        
-        // $this->upload->initialize($config);
-        // // list($width, $height, $type, $attr) = getimagesize($_FILES['image1']['tmp_name']);
-        // // if ($width != $height){
-        // //     $config['source_image'] = $_FILES['image1']['tmp_name'];
-        // //     $config['x_axis'] = ($width-min($width, $height))/2;
-        // //     $config['y_axis'] = ($height-min($width, $height))/2;
-        // //     $config['maintain_ratio'] = FALSE;
-        // //     $config['width'] = min($width, $height);
-        // //     $config['height'] = min($width, $height);
-        // //     $this->image_lib->initialize($config);
-        // //     $this->image_lib->crop();
-        // // }
-        // // $check = $this->db->select('PROFILEPIC_URL')->where('EMAIL', $email)->get('user')->row();
-        // // if (isset($check->PROFILEPIC_URL)){
-        // //   if (strpos($check->PROFILEPIC_URL, 'http://') !== false){
-        // //     unlink('./images/users/' . explode('/', $check->PROFILEPIC_URL)[5]);
-        // //   } else {
-        // //     unlink('./images/users/' . explode('/', $check->PROFILEPIC_URL)[3]);
-        // //   }
-        // // }
-        // if($this->upload->do_upload('image1')){
-        //     $upload = $this->upload->data();
-        //     $this->response(['status' => FALSE, 'message' => $_FILES['image1'], 'final' => $upload], REST_Controller::HTTP_OK);
-        // }else{
-        //     $this->response(['status' => FALSE, 'message' => strip_tags($this->upload->display_errors())], 404);
-        // }
-        // if ($this->upload->do_upload('picture')){
-        //   $upload = $this->upload->data();
-        //   $this->db->where('EMAIL', $email)->update('user', ['PROFILEPIC_URL' => base_url('images/users/' . $upload['file_name'])]);
-        //   $this->response(['status' => TRUE, 'message' => base_url('images/users/' . $upload['file_name'])], 200);
-        // } else {
-        //   $this->response(['status' => FALSE, 'message' => strip_tags($this->upload->display_errors())], 404);
-        // }
       } 
 
   public function result_put(){
