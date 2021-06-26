@@ -26,9 +26,6 @@
 <?php if ($this->session->userdata('role') != 'publisher'){ ?>
 <div class="py-0">
   <div class="container">
-    <div class="row">
-      <div class="col-md-12"><a class="btn btn-primary" href="<?php echo base_url('videos/add_video'); ?>"><i class="fa fa-plus"></i>&ensp;Tambahkan Video</a></div>
-    </div>
   </div>
 </div>
 <?php } ?>
@@ -55,12 +52,6 @@
                     <small><?= $video->DESCRIPTION ?></small>
                   </td>
                   <td class="text-center">
-                    <?php 
-                    if (in_array($this->session->userdata('role'), ['editor', 'admin'])) { ?>
-                    <a href="<?= base_url('videos/edit_video' . $video->ID_VIDEO) ?>" class="btn btn-sm btn-info"><i class="fa fa-pencil"></i>&nbsp;Edit</a>
-                    <a href="#" data-toggle="modal" data-target="#ModalDelete" data-id="<?php echo $video->ID_VIDEO; ?>"
-                        data-title="<?php echo $video->TITLE; ?>" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i>&nbsp;Hapus</a>
-                    <?php } ?>
                     <?php if ($video->STATUS_PUBLISHED == 't'){ ?>
                         <a href="<?= base_url('video/change/' . $video->ID_VIDEO . '/' . 0) ?>" class="btn btn-sm btn-secondary"><i class="fa fa-eye-slash"></i>&nbsp;Sembunyikan</a>
                     <?php } else { ?>
