@@ -68,7 +68,6 @@
                     <a href="#" data-toggle="modal" data-target="#ModalDelete" data-id="<?php echo $news->ID_NEWS; ?>"
                         data-title="<?php echo $news->TITLE_NEWS; ?>" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i>&nbsp;Hapus</a>
                     <?php } ?>
-                    <a href="#" class="btn btn-sm btn-success"><i class="fa fa-bar-chart"></i>&nbsp;Statistik</a>
                   </td>
                 </tr>
               <?php $i++; } ?>
