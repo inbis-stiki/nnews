@@ -55,7 +55,7 @@ class User extends CI_Controller {
 		$store['profile']['DATE_BIRTH'] = $param['DATE_BIRTH'];
 		
 		$this->Muser->insertDoctor($store);
-		$this->session->flashdata('success', 'Berhasil menambahkan dokter baru!');
+		$this->session->set_flashdata('success', 'Berhasil menambahkan dokter baru!');
 		redirect('user');
 	}
 	public function editDoctor(){
@@ -71,7 +71,7 @@ class User extends CI_Controller {
 		$update['profile']['DATE_BIRTH'] = $param['DATE_BIRTH'];
 		
 		$this->Muser->updateDoctor($update);
-		$this->session->flashdata('success', 'Berhasil mengubah data dokter!');
+		$this->session->set_flashdata('success', 'Berhasil mengubah data dokter!');
 		redirect('user');
 	}
 // 	public function destroyDoctor(){
