@@ -20,6 +20,7 @@ class User extends CI_Controller {
 
 	public function index(){
 		$data['users'] = $this->Muser->getAllUsers();
+		$data['doctors'] = $this->Muser->getAllDoctors();
 		$data['main_content'] = 'user_view';
 		$data['page_title'] = 'Manajemen Pengguna';
 		$this->load->view('dashboard', $data);
@@ -28,6 +29,24 @@ class User extends CI_Controller {
 	public function loadAllUsers(){
 		$users = $this->auth->listUsers();
 		$this->Muser->loadAllUserDatas($users);
+	}
+	public function storeDoctor(){
+		$param = $_POST;
+		$this->Muser->insertDoctor($param);
+		$this->session->flashdata('success', 'Berhasil menambahkan dokter baru!');
+		redirect('user');
+	}
+	public function editDoctor(){
+		$param = $_POST;
+		$this->Muser->updateDoctor($param);
+		$this->session->flashdata('success', 'Berhasil mengubah data dokter!');
+		redirect('user');
+	}
+	public function destroyDoctor(){
+		$param = $_POST;
+		$this->Muser->deleteDoctor($param);
+		$this->session->flashdata('success', 'Berhasil menghapus data dokter!');
+		redirect('user');
 	}
 }
 ?>
