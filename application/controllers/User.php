@@ -74,7 +74,9 @@ class User extends CI_Controller {
 		$update['user']['EMAIL'] = $param['EMAIL'];
 		$update['user']['ID_ROLE'] = '2';
 		$update['user']['NAME'] = $param['NAME'];
-		$store['user']['PASSWORD'] = $param['use_password'] == 'on' ? md5('dokterMamo') : md5($param['PASSWORD']);
+		if($param['user_password'] == 'on'){
+			$update['user']['PASSWORD'] = md5('dokterMamo');
+		}
 		
 		$update['profile']['EMAIL'] = $param['EMAIL'];
 		$update['profile']['PHONE'] = $param['PHONE'];
