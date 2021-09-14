@@ -26,17 +26,17 @@
 </div>
 <div class="py-4">
   <div class="container">
-    <form id="c_form-h" method="post" action="<?= base_url('user/storeDoctor'); ?>" enctype="multipart/form-data">
+    <form id="c_form-h" method="post" action="<?= base_url('user/editDoctor'); ?>" enctype="multipart/form-data">
       <div class="form-group row"> 
         <label for="judul" class="col-2 col-form-label">Email*</label>
         <div class="col-3">
-          <input type="email" class="form-control" name="EMAIL" value="<?= doctor->EMAIL?>" required> 
+          <input type="email" class="form-control" name="EMAIL" value="<?= $doctor->EMAIL?>" required> 
         </div>
       </div>
       <div class="form-group row"> 
         <label for="judul" class="col-2 col-form-label">Password</label>
         <div class="col-3">
-          <input type="password" class="form-control" name="PASSWORD" value="<?= doctor->PASSWORD?>" id="password"> 
+          <input type="password" class="form-control" name="PASSWORD" value="<?= $doctor->PASSWORD?>" id="password"> 
         </div>
         <div class="form-check form-check-inline">
           <input class="form-check-input" type="checkbox" name="use_password" id="use_password">
@@ -46,19 +46,19 @@
       <div class="form-group row">
         <label for="isi" class="col-2 col-form-label">Nama*</label>
         <div class="col-5">
-          <input type="text" class="form-control" name="NAME" value="<?= doctor->NAME?>" required>
+          <input type="text" class="form-control" name="NAME" value="<?= $doctor->NAME?>" required>
         </div>
       </div>
       <div class="form-group row">
         <label for="isi" class="col-2 col-form-label">Telefon*</label>
         <div class="col-5">
-          <input type="tel" class="form-control" name="PHONE" value="<?= doctorProfile->PHONE?>" required>
+          <input type="tel" class="form-control" name="PHONE" value="<?= $doctorProfile->PHONE?>" required>
         </div>
       </div>
       <div class="form-group row">
         <label for="isi" class="col-2 col-form-label">Tanggal Lahir*</label>
         <div class="col-5">
-          <input type="date" class="form-control" name="DATE_BIRTH" value="<?= doctorProfile->DATE_BIRTH?>" required>
+          <input type="date" class="form-control" name="DATE_BIRTH" value="<?= $doctorProfile->DATE_BIRTH?>" required>
         </div>
       </div>
       <button type="submit" class="btn btn-primary">Ubah Data Dokter</button>
