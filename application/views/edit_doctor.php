@@ -36,12 +36,12 @@
       <div class="form-group row"> 
         <label for="judul" class="col-2 col-form-label">Password</label>
         <div class="col-3">
-          <input type="password" class="form-control" name="PASSWORD" value="<?= $doctor->PASSWORD?>" id="password"> 
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" name="use_password" id="use_password">
+            <label class="form-check-label">Gunakan Password Default</label>
+          </div>
         </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" name="use_password" id="use_password">
-          <label class="form-check-label">Gunakan Password Default</label>
-        </div>
+
       </div>
       <div class="form-group row">
         <label for="isi" class="col-2 col-form-label">Nama*</label>
