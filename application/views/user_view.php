@@ -52,7 +52,7 @@
                 <td><?= $d->NAME ?></td>
                 <td>
                   <a href="<?= base_url('user/edit_doctor/'.$d->EMAIL) ?>" class="btn btn-sm btn-info"><i class="fa fa-pencil"></i>&nbsp;Edit</a>
-                  <a href="#" data-toggle="modal" data-target="#ModalDeleteDoctor" data-id="<?= $d->EMAIL ?>"
+                  <a href="#" data-toggle="modal" data-target="#ModalDeleteDoctor" data-id="<?= $d->EMAIL ?><i class="fa fa-trash">&nbsp;Hapus</a>
                 </td>
               </tr>
             <?php } ?>
