@@ -32,21 +32,41 @@ class User extends CI_Controller {
 	}
 	public function storeDoctor(){
 		$param = $_POST;
-		$this->Muser->insertDoctor($param);
+		
+		$store['user']['EMAIL'] = $param['EMAIL'];
+		$store['user']['ID_ROLE'] = $param['ID_ROLE'];
+		$store['user']['NAME'] = $param['NAME'];
+		$store['user']['PASSWORD'] = $param['PASSWORD'];
+		
+		$store['profile']['EMAIL'] = $param['EMAIL'];
+		$store['profile']['PHONE'] = $param['PHONE'];
+		$store['profile']['DATE_BIRTH'] = $param['DATE_BIRTH'];
+		
+		$this->Muser->insertDoctor($store);
 		$this->session->flashdata('success', 'Berhasil menambahkan dokter baru!');
 		redirect('user');
 	}
 	public function editDoctor(){
 		$param = $_POST;
-		$this->Muser->updateDoctor($param);
+		
+		$update['user']['EMAIL'] = $param['EMAIL'];
+		$update['user']['ID_ROLE'] = $param['ID_ROLE'];
+		$update['user']['NAME'] = $param['NAME'];
+		$update['user']['PASSWORD'] = $param['PASSWORD'];
+		
+		$update['profile']['EMAIL'] = $param['EMAIL'];
+		$update['profile']['PHONE'] = $param['PHONE'];
+		$update['profile']['DATE_BIRTH'] = $param['DATE_BIRTH'];
+		
+		$this->Muser->updateDoctor($update);
 		$this->session->flashdata('success', 'Berhasil mengubah data dokter!');
 		redirect('user');
 	}
-	public function destroyDoctor(){
-		$param = $_POST;
-		$this->Muser->deleteDoctor($param);
-		$this->session->flashdata('success', 'Berhasil menghapus data dokter!');
-		redirect('user');
-	}
+// 	public function destroyDoctor(){
+// 		$param = $_POST;
+// 		$this->Muser->deleteDoctor($param);
+// 		$this->session->flashdata('success', 'Berhasil menghapus data dokter!');
+// 		redirect('user');
+// 	}
 }
 ?>
