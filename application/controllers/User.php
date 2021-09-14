@@ -35,10 +35,10 @@ class User extends CI_Controller {
 		$data['page_title'] = 'Tambahkan Dokter';
 		$this->load->view('dashboard', $data);
   	}
-  	public function edit_user($email){
+  	public function edit_doctor($email){
     		$data['main_content'] = 'edit_doctor';
     		$data['page_title'] = 'Ubah Data Dokter';
-    		$data['user'] = $this->Muser->getDoctor($email);
+    		$data['doctor'] = $this->Muser->getDoctor($email);
 		$this->load->view('dashboard', $data);
   	}
 		
