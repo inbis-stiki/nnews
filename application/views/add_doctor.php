@@ -39,7 +39,7 @@
           <input type="password" class="form-control" name="PASSWORD" id="password"> 
         </div>
         <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" name="use_password" id="use_password" required>
+          <input class="form-check-input" type="checkbox" name="use_password" id="use_password">
           <label class="form-check-label">Gunakan Password Default</label>
         </div>
       </div>
@@ -53,6 +53,12 @@
         <label for="isi" class="col-2 col-form-label">Telefon*</label>
         <div class="col-5">
           <input type="tel" class="form-control" name="PHONE" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="isi" class="col-2 col-form-label">Tanggal Lahir*</label>
+        <div class="col-5">
+          <input type="date" class="form-control" name="DATE_BIRTH" required>
         </div>
       </div>
       <button type="submit" class="btn btn-primary">Buat User Baru</button>
