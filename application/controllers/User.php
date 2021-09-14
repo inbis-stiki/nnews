@@ -39,6 +39,13 @@ class User extends CI_Controller {
     		$data['main_content'] = 'edit_doctor';
     		$data['page_title'] = 'Ubah Data Dokter';
     		$data['doctor'] = $this->Muser->getDoctor($email);
+		if(!empty($data['doctor']->ID_ROLE) && $data['doctor']->ID_ROLE == '1'){
+			$this->session->set_flashdata('error_message', 'Anda tidak diizinkan mengakses data user!');
+			redirect('user');
+		}else if(empty($data['doctor']->ID_ROLE)){
+			$this->session->set_flashdata('error_message', 'Data dokter tidak ditemukan!');
+			redirect('user');
+		}
 		$this->load->view('dashboard', $data);
   	}
 		
