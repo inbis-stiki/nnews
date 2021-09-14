@@ -29,7 +29,7 @@
     <div class="row">
       <div class="col-md-12"><h4 style="text-align: center;">Data Dokter<h4></div>
     </div>
-    <div class="row">
+    <div class="row" style="margin-top: 24px;margin-bottom: 24px;">
       <div class="col-md-12"><a class="btn btn-primary" href="<?php echo base_url('user/add_doctor'); ?>"><i class="fa fa-plus"></i>&ensp;Tambahkan Dokter</a></div>
     </div>
     <div class="row">
@@ -52,6 +52,7 @@
                 <td><?= $d->NAME ?></td>
                 <td>
                   <a href="<?= base_url('user/edit_doctor/'.$d->EMAIL) ?>" class="btn btn-sm btn-info"><i class="fa fa-pencil"></i>&nbsp;Edit</a>
+                  <a href="#" data-toggle="modal" data-target="#ModalDeleteDoctor" data-id="<?= $d->EMAIL ?>"
                 </td>
               </tr>
             <?php } ?>
@@ -60,7 +61,7 @@
         </div>
       </div>
     </div>
-    <div class="row">
+    <div class="row" style="margin-top: 24px;">
       <div class="col-md-12"><h4 style="text-align: center;">Data User<h4></div>
     </div>
     <div class="row">
