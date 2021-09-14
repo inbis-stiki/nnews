@@ -7,11 +7,11 @@
   </div>
 </div>
 <div class="py-0">
-  <?php if ($this->session->flashdata('success_message')){ ?>
+  <?php if ($this->session->flashdata('success')){ ?>
   <div class="container">
     <div class="alert alert-success" role="alert">
       <h4 class="alert-heading">Sukses!<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></h4>
-      <p><?= $this->session->flashdata('success_message') ?></p>
+      <p><?= $this->session->flashdata('success') ?></p>
     </div>
   </div>
   <?php }
@@ -27,16 +27,22 @@
 <div class="py-4">
   <div class="container">
     <div class="row">
+      <div class="col-md-12"><h4 style="text-align: center;">Data Dokter<h4></div>
+    </div>
+    <div class="row">
+      <div class="col-md-12"><a class="btn btn-primary" href="<?php echo base_url('user/add_doctor'); ?>"><i class="fa fa-plus"></i>&ensp;Tambahkan Dokter</a></div>
+    </div>
+    <div class="row">
       <div class="col-md-12">
         <div class="table-responsive">
-          <table class="table table-striped table-borderless" id="newstable">
+          <table class="table table-striped table-borderless" id="doctorTable">
             <thead>
               <tr>
                 <th class="text-center">Email</th>
                 <th class="text-center">Nama</th>
                 <!-- <th class="text-center">Login Terakhir</th>
                 <th class="text-center">Tipe User</th> -->
-                <!-- <th class="text-center" style="width: 50px">Aksi</th> -->
+                <th class="text-center" style="width: 50px">Aksi</th>
               </tr>
             </thead>
             <tbody>
@@ -44,17 +50,18 @@
               <tr>
                 <td><?= $d->EMAIL ?></td>
                 <td><?= $d->NAME ?></td>
-                <!-- <td><?= tgl_indo($d->LAST_LOGIN) ?></td>
-                <td><?= $d->USER_TYPE ?></td> -->
-                <!-- <td class="text-center">
-
-                </td> -->
+                <td>
+                  <a href="<?= base_url('user/edit_doctor/'.$d->EMAIL) ?>" class="btn btn-sm btn-info"><i class="fa fa-pencil"></i>&nbsp;Edit</a>
+                </td>
               </tr>
             <?php } ?>
             </tbody>
           </table>
         </div>
       </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12"><h4 style="text-align: center;">Data User<h4></div>
     </div>
     <div class="row">
       <div class="col-md-12">
