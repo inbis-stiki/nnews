@@ -98,6 +98,11 @@ firebase.initializeApp(firebaseConfig);
       "ordering": false,
       "info":     false
     });
+    $('#doctorTable').DataTable( {
+      "paging":   true,
+      "ordering": false,
+      "info":     false
+    });
   });
 </script>
 
