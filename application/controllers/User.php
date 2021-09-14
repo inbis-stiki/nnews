@@ -48,7 +48,7 @@ class User extends CI_Controller {
 		$store['user']['EMAIL'] = $param['EMAIL'];
 		$store['user']['ID_ROLE'] = $param['ID_ROLE'];
 		$store['user']['NAME'] = $param['NAME'];
-		$store['user']['PASSWORD'] = md5($param['PASSWORD']);
+		$store['user']['PASSWORD'] = $param['use_password'] == 'on' ? md5('dokterMamo') : md5($param['PASSWORD']);
 		
 		$store['profile']['EMAIL'] = $param['EMAIL'];
 		$store['profile']['PHONE'] = $param['PHONE'];
@@ -64,7 +64,7 @@ class User extends CI_Controller {
 		$update['user']['EMAIL'] = $param['EMAIL'];
 		$update['user']['ID_ROLE'] = $param['ID_ROLE'];
 		$update['user']['NAME'] = $param['NAME'];
-		$update['user']['PASSWORD'] = md5($param['PASSWORD']);
+		$store['user']['PASSWORD'] = $param['use_password'] == 'on' ? md5('dokterMamo') : md5($param['PASSWORD']);
 		
 		$update['profile']['EMAIL'] = $param['EMAIL'];
 		$update['profile']['PHONE'] = $param['PHONE'];
