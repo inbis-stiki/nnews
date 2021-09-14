@@ -15,7 +15,7 @@ class Muser extends CI_Model {
   
   public function insertDoctor($param){
   	$this->db->insert('mobile_user', $param['user']);
-	$this->db->insert('mobile_user', $param['profile']);
+	$this->db->insert('profile_user', $param['profile']);
   }
 	
   public function updateDoctor($param){
