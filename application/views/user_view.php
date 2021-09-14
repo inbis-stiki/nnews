@@ -50,7 +50,7 @@
               <tr>
                 <td><?= $d->EMAIL ?></td>
                 <td><?= $d->NAME ?></td>
-                <td>
+                <td class="text-center">
                   <a href="<?= base_url('user/edit_doctor/'.$d->EMAIL) ?>" class="btn btn-sm btn-info"><i class="fa fa-pencil"></i>&nbsp;Edit</a>
                 </td>
               </tr>
