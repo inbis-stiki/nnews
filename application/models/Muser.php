@@ -8,7 +8,26 @@ class Muser extends CI_Model {
   public function getAllUsers(){
     return $this->db->get_where('mobile_user', ['ID_ROLE' => '1'])->result();
   }
-
+	
+  public function getAllDoctors(){
+    return $this->db->get_where('mobile_user', ['ID_ROLE' => '2'])->result();
+  }
+  
+  public function insertDoctor($param){
+  	$this->db->insert('mobile_user', $param['user']);
+	$this->db->insert('mobile_user', $param['profile']);
+  }
+	
+  public function updateDoctor($param){
+	$this->db->where('EMAIL', $param['profile']['EMAIL'])->update('profile_user', $param['profile']);
+  	$this->db->where('EMAIL', $param['user']['EMAIL'])->update('mobile_user', $param['user']);
+  }
+	
+//   public function deleteDoctor($param){
+//   	$this->db->delete('mobile_user', ['EMAIL']$param['user']);
+// 	$this->db->delete('profile_user', $param['profile']);
+//   }
+	
   public function loadAllUserDatas($users){
     foreach ($users as $u){
       $email = $u->email;
