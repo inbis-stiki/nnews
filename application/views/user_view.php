@@ -40,6 +40,36 @@
               </tr>
             </thead>
             <tbody>
+            <?php foreach ($doctors as $d){ ?>
+              <tr>
+                <td><?= $d->EMAIL ?></td>
+                <td><?= $d->NAME ?></td>
+                <!-- <td><?= tgl_indo($d->LAST_LOGIN) ?></td>
+                <td><?= $d->USER_TYPE ?></td> -->
+                <!-- <td class="text-center">
+
+                </td> -->
+              </tr>
+            <?php } ?>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="table-responsive">
+          <table class="table table-striped table-borderless" id="newstable">
+            <thead>
+              <tr>
+                <th class="text-center">Email</th>
+                <th class="text-center">Nama</th>
+                <!-- <th class="text-center">Login Terakhir</th>
+                <th class="text-center">Tipe User</th> -->
+                <!-- <th class="text-center" style="width: 50px">Aksi</th> -->
+              </tr>
+            </thead>
+            <tbody>
             <?php foreach ($users as $u){ ?>
               <tr>
                 <td><?= $u->EMAIL ?></td>
