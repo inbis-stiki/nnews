@@ -30,6 +30,18 @@ class User extends CI_Controller {
 		$users = $this->auth->listUsers();
 		$this->Muser->loadAllUserDatas($users);
 	}
+  	public function add_doctor(){
+    		$data['main_content'] = 'add_doctor';
+		$data['page_title'] = 'Tambahkan Dokter';
+		$this->load->view('dashboard', $data);
+  	}
+  	public function edit_user($email){
+    		$data['main_content'] = 'edit_doctor';
+    		$data['page_title'] = 'Ubah Data Dokter';
+    		$data['user'] = $this->Muser->getDoctor($email);
+		$this->load->view('dashboard', $data);
+  	}
+		
 	public function storeDoctor(){
 		$param = $_POST;
 		
