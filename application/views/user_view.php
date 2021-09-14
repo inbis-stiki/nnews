@@ -42,7 +42,7 @@
                 <th class="text-center">Nama</th>
                 <!-- <th class="text-center">Login Terakhir</th>
                 <th class="text-center">Tipe User</th> -->
-                <th class="text-center" style="width: 50px">Aksi</th>
+                <th class="text-center">Aksi</th>
               </tr>
             </thead>
             <tbody>
@@ -52,7 +52,6 @@
                 <td><?= $d->NAME ?></td>
                 <td>
                   <a href="<?= base_url('user/edit_doctor/'.$d->EMAIL) ?>" class="btn btn-sm btn-info"><i class="fa fa-pencil"></i>&nbsp;Edit</a>
-                  <a href="#" data-toggle="modal" data-target="#ModalDeleteDoctor" data-id="<?= $d->EMAIL ?><i class="fa fa-trash">&nbsp;Hapus</a>
                 </td>
               </tr>
             <?php } ?>
