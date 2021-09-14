@@ -46,7 +46,7 @@ class User extends CI_Controller {
 		$param = $_POST;
 		
 		$store['user']['EMAIL'] = $param['EMAIL'];
-		$store['user']['ID_ROLE'] = $param['ID_ROLE'];
+		$store['user']['ID_ROLE'] = '2';
 		$store['user']['NAME'] = $param['NAME'];
 		$store['user']['PASSWORD'] = $param['use_password'] == 'on' ? md5('dokterMamo') : md5($param['PASSWORD']);
 		
@@ -62,7 +62,7 @@ class User extends CI_Controller {
 		$param = $_POST;
 		
 		$update['user']['EMAIL'] = $param['EMAIL'];
-		$update['user']['ID_ROLE'] = $param['ID_ROLE'];
+		$update['user']['ID_ROLE'] = '2';
 		$update['user']['NAME'] = $param['NAME'];
 		$store['user']['PASSWORD'] = $param['use_password'] == 'on' ? md5('dokterMamo') : md5($param['PASSWORD']);
 		
