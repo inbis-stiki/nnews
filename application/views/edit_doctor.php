@@ -38,7 +38,7 @@
         <div class="col-3">
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="checkbox" name="use_password" id="use_password">
-            <label class="form-check-label">Gunakan Password Default</label>
+            <label class="form-check-label">Gunakan Password Default <b><i>"dokterMamo"</i></b></label>
           </div>
         </div>
 

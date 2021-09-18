@@ -67,10 +67,10 @@
         <h1 class="">Paling Trending</h1>
         <div class="col-md-12" id="chart_div"> </div>
       </div>
-      <div class="col-md-12">
+      <!-- <div class="col-md-12">
         <h1 class="">Paling Disukai</h1>
         <div class="col-md-12" id="chart_like_div"> </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>
@@ -103,17 +103,17 @@ $('.counter').each(function() {
     chart.draw(data, options);
   }
 
-  function drawLikedChart() {
-    var data = new google.visualization.arrayToDataTable([
-      ['News Title', 'Likes', { role: 'style' }],
-      <?php foreach($likes as $t){ ?>
-      ['<?= limit_text($t->TITLE_NEWS) ?>', <?= $t->LIKES ?>, 'red'],
-      <?php } ?>
-    ]);
-    var options = {height: 300, legend: {position: 'bottom'}, colors: ['red']};
-    var chart = new google.visualization.BarChart(document.getElementById('chart_like_div'));
-    chart.draw(data, options);
-  }
+  // function drawLikedChart() {
+  //   var data = new google.visualization.arrayToDataTable([
+  //     ['News Title', 'Likes', { role: 'style' }],
+  //     <?php foreach($likes as $t){ ?>
+  //     ['<?= limit_text($t->TITLE_NEWS) ?>', <?= $t->LIKES ?>, 'red'],
+  //     <?php } ?>
+  //   ]);
+  //   var options = {height: 300, legend: {position: 'bottom'}, colors: ['red']};
+  //   var chart = new google.visualization.BarChart(document.getElementById('chart_like_div'));
+  //   chart.draw(data, options);
+  // }
 </script>
 <?php 
 function limit_text($text, $limit = 4) {

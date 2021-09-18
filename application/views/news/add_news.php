@@ -53,16 +53,6 @@
           </div>
         </div>
         <div class="form-group row">
-          <label for="coverstory" class="col-2 col-form-label">Cover Story</label>
-          <div class="col-4"><select class="custom-select" name="coverstory">
-            <option selected="" value="">Tidak Ada Cover Story</option>
-            <?php foreach($cover_story as $cs){ ?>
-            <option value="<?= $cs['ID_COVERSTORY'] ?>"><?= $cs['TITLE_COVERSTORY'] ?></option>
-            <?php } ?>
-            </select>
-          </div>
-        </div>
-        <div class="form-group row">
           <label class="col-2">Tag*</label>
           <div class="col-9">
             <input type="text" class="form-control" name="tag" id="tokenfield">

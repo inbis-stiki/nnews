@@ -44,7 +44,6 @@
                 <th class="text-center">Kategori</th>
                 <th class="text-center">Tanggal Publikasi</th>
                 <th class="text-center"><i class="fa fa-eye"></i></th>
-                <th class="text-center"><i class="fa fa-heart"></i></th>
                 <th class="text-center"><i class="fa fa-share-alt"></i></th>
                 <th class="text-center">Aksi</th>
               </tr>
@@ -57,7 +56,6 @@
                   <td class="text-center"><?php echo $news->NAME_CATEGORY; ?></td>
                   <td class="text-center"><?php echo tgl_indo($news->DATE_NEWS) ?></td>
                   <td class="text-center"><?php echo $news->VIEWS_COUNT; ?></td>
-                  <td class="text-center"><?php echo $news->LIKES ?></td>
                   <td class="text-center"><?php echo $news->SHARES_COUNT; ?></td>
                   <td class="text-center">
                     <?php if (in_array($this->session->userdata('role'), ['publisher', 'admin'])){ ?>

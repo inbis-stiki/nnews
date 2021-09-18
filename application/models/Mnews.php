@@ -37,9 +37,7 @@ class Mnews extends CI_Model {
 	}
 
 	function getNews($id){
-    $this->db->select('news.*, news_cover.ID_COVERSTORY');
-    $this->db->join('news_cover', 'news_cover.ID_NEWS = news.ID_NEWS', 'left');
-		return $this->db->where('news.ID_NEWS', $id)->get('news')->row();
+		return $this->db->where('news.ID_NEWS', $id)->get('news')->row();	
 	}
 
 	function clickViews($idne, $email){

@@ -20,7 +20,7 @@ class News extends CI_Controller {
 		$param['main_content'] = 'news/add_news';
 		$param['page_title'] = 'Tambahkan Berita';
 		$param['category'] = $this->db->where('ID_CATEGORY <>', 'G')->get('category')->result();
-		$param['cover_story'] = $this->Mcoverstory->getAllCoverStories();
+		// $param['cover_story'] = $this->Mcoverstory->getAllCoverStories();
 		$param['tags'] = $this->Mtags->getAllTags();
 		$this->load->view('dashboard', $param);
 	}
@@ -54,7 +54,6 @@ class News extends CI_Controller {
 		$param['news'] = $this->Mnews->getNews($id_news);
 		$param['tags'] = $this->Mtags->getNewsTags($id_news);
 		$param['category'] = $this->db->where('ID_CATEGORY <>', 'G')->get('category')->result();
-		$param['cover_story'] = $this->Mcoverstory->getAllCoverStories();
 		$param['tags'] = $this->Mtags->getAllTags();
 		$param['news_tags'] = $this->Mtags->getNewsTags($id_news);
 		$this->load->view('dashboard', $param);
@@ -108,7 +107,6 @@ class News extends CI_Controller {
 		$title = $this->input->post('judul');
 		$content = $this->input->post('isi');
 		$category = $this->input->post('kategori');
-		$coverstory = $this->input->post('coverstory');
 		$tags = $this->input->post('tag');
 		$old_files = $this->input->post('old_files');
 		$config = array(
@@ -136,16 +134,6 @@ class News extends CI_Controller {
 				'NEWS_IMAGE' => $fileData['file_name']
 			);
 			$this->Mnews->updateNews($id_news, $data);
-			if ($coverstory){
-				$data = array('ID_COVERSTORY' => $coverstory, 'ID_NEWS' => $id_news);
-        if ($this->db->where('ID_NEWS', $id_news)->get('news_cover')->num_rows() == 0){
-          $this->Mcoverstory->addNewsToCoverStory($data);
-        } else {
-          $this->Mcoverstory->updateNewsInCoverStory($id_news, $data);
-        }
-			} else {
-        $this->db->where('ID_NEWS', $id_news)->delete('news_cover');
-      }
 			$tag = explode(', ', $tags);
 			$this->Mtags->updateTags($tag, $id_news);
 			$this->session->set_flashdata('success_message', 'Berita/Artikel berhasil diubah');

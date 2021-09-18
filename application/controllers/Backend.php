@@ -26,7 +26,7 @@ class Backend extends CI_Controller {
     $name = $this->input->post('nama');
     $use_password = $this->input->post('use_password');
     $role = $this->input->post('jabatan');
-    $password = $use_password == 'on' ? 'digimagz' : $this->input->post('password');
+    $password = $use_password == 'on' ? 'mamoapp' : $this->input->post('password');
     if (empty($username) || empty($name) || empty($role) || ($use_password == 'off' && empty($password))){
       $this->session->set_flashdata('error_message', 'Harap masukkan data dengan benar!');
       redirect('backend/add_user');
