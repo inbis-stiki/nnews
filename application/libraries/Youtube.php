@@ -1,8 +1,8 @@
 <?php
 class Youtube{
 
-    private $myApiKey = "AIzaSyAWInBYYlyCn5b5lVM4FCXgBRirfJfclN8"; // API Key
-    private $myChannelID = "UC1QoJ6wmGGalOLcsWFiMN_w"; // PTPN X Channel ID
+    private $myApiKey = "AIzaSyBwF-SlaLyFZE6BEKRmGZ-V3nR9bFWv9ME";
+    private $myChannelID = "UCwWOrOUimjdNl5abPRiuCHg";
 
     public function getVideos(){
         $myQuery = "https://www.googleapis.com/youtube/v3/search?key=$this->myApiKey&channelId=$this->myChannelID&part=snippet,id&order=date";
