@@ -123,7 +123,7 @@ class News extends CI_Controller {
         $this->image_resize($fileData);
 				$old = $this->db->where('ID_NEWS', $id_news)->get('news')->row();
 				$old_files = isset($old->NEWS_IMAGE) ? $old->NEWS_IMAGE : NULL;
-				unlink('./images/news/'.$old_files);
+				unlink('images/news/'.$old_files);
 			} else {
 				$fileData['file_name'] = $old_files;
 			}
@@ -167,7 +167,7 @@ class News extends CI_Controller {
 	public function delete($id){
 		$news = $this->Mnews->getNews($id);
 		if (!empty($news->NEWS_IMAGE)){
-			$path = './images/news/' . $news->NEWS_IMAGE;
+			$path = 'images/news/' . $news->NEWS_IMAGE;
 			unlink($path);
 		}
 		$this->Mnews->deleteNews($id);
@@ -180,7 +180,7 @@ class News extends CI_Controller {
     $n_w = 2048; 
     if ($w > 2048){
       $config['image_library'] = 'gd2';
-      $config['source_image'] = './images/news/' . $image_data['file_name'];
+      $config['source_image'] = 'images/news/' . $image_data['file_name'];
       $config['maintain_ratio'] = TRUE;
       $config['width'] = $n_w;
       $this->image_lib->initialize($config);
