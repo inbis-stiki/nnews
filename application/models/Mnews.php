@@ -23,6 +23,7 @@ class Mnews extends CI_Model {
 	function deleteNews($id){
     $this->db->where('ID_NEWS', $id)->delete('news_view');
     $this->db->where('ID_NEWS', $id)->delete('news_share');
+    $this->db->where('ID_NEWS', $id)->delete('news_tags');
     $this->db->where('ID_NEWS', $id)->delete('news');
 		return $this->db->affected_rows();
 	}
