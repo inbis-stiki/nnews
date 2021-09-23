@@ -23,6 +23,7 @@ class Backend extends CI_Controller {
 
   public function create(){
     $username = $this->input->post('username');
+    $email = $this->input->post('email');
     $name = $this->input->post('nama');
     $use_password = $this->input->post('use_password');
     $role = $this->input->post('jabatan');
@@ -33,6 +34,7 @@ class Backend extends CI_Controller {
     } else {
       $data = [
         'USERNAME' => $username, 
+        'EMAIL' => $email, 
         'NAME' => $name, 
         'PASSWORD' => md5($password),
         'ROLE' => $role,
@@ -53,6 +55,7 @@ class Backend extends CI_Controller {
 
   public function update(){
     $username = $this->input->post('username');
+    $email = $this->input->post('email');
     $name = $this->input->post('nama');
     $use_password = $this->input->post('use_password');
     $role = $this->input->post('jabatan');
@@ -63,6 +66,7 @@ class Backend extends CI_Controller {
     } else {
       $data = [
         'NAME' => $name, 
+        'EMAIL' => $email, 
         'PASSWORD' => md5($password),
         'ROLE' => $role,
         'DEFAULT_PASSWORD' => ($use_password == 'off' ? false : true),
