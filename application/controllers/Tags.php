@@ -6,6 +6,7 @@ class Tags extends CI_Controller {
 	function __construct(){
 		parent::__construct();
 		$this->load->model('Mtags');
+		$this->load->model('Mnews');
 	}
 
 	public function index(){
@@ -70,6 +71,7 @@ class Tags extends CI_Controller {
   }
 
 	public function delete($id_tags){
+    $this->Mnews->delNewsTag($id_tags);
     $this->Mtags->deleteTags($id_tags);
     $this->session->set_flashdata('success_message', 'Tag berhasil dihapus');
     redirect('tags');

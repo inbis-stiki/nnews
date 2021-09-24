@@ -28,6 +28,10 @@ class Mnews extends CI_Model {
 		return $this->db->affected_rows();
 	}
 
+	function delNewsTag($idTag){
+		$this->db->where('ID_TAGS', $idTag)->delete('news_tags');
+	}
+
 	function getAllNews($with_gallery = false){
     $this->db->order_by('DATE_NEWS','desc');
     if (!$with_gallery){
