@@ -159,7 +159,7 @@ class News extends REST_Controller {
 
         $this->db->insert('news_view', $dataNewsView);
         
-        $this->db->query('UPDATE news SET "VIEWS_COUNT" = "VIEWS_COUNT" + 1 WHERE "ID_NEWS" = '.$idNews); // update news view count on table news
+        $this->db->query('UPDATE news SET VIEWS_COUNT = VIEWS_COUNT + 1 WHERE ID_NEWS = '.$idNews); // update news view count on table news
 
         $this->response(['status' => TRUE, 'message' => 'Data news view berhasil disimpan'], REST_Controller::HTTP_OK);
       }else{
@@ -188,7 +188,7 @@ class News extends REST_Controller {
 
         $this->db->insert('news_share', $dataNewsShare);
         
-        $this->db->query('UPDATE news SET "SHARES_COUNT" = "SHARES_COUNT" + 1 WHERE "ID_NEWS" = '.$idNews); // update news share count on table news
+        $this->db->query('UPDATE news SET SHARES_COUNT = SHARES_COUNT + 1 WHERE ID_NEWS = '.$idNews); // update news share count on table news
 
         $this->response(['status' => TRUE, 'message' => 'Data news share berhasil disimpan'], REST_Controller::HTTP_OK);
       }else{
