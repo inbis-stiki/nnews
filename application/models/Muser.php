@@ -12,11 +12,11 @@ class Muser extends CI_Model {
   public function getAllDoctors(){
     return $this->db->get_where('mobile_user', ['ID_ROLE' => '2'])->result();
   }
-  public function getDoctor($email){
-  	return $this->db->get_where('mobile_user', ['EMAIL' => $email])->row();
+  public function getDoctor($username){
+  	return $this->db->get_where('mobile_user', ['USERNAME' => $username])->row();
   }
-  public function getDoctorProfile($email){
-  	return $this->db->get_where('profile_user', ['EMAIL' => $email])->row();
+  public function getDoctorProfile($username){
+  	return $this->db->get_where('profile_user', ['USERNAME' => $username])->row();
   }
   
   public function insertDoctor($param){

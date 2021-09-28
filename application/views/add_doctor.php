@@ -28,6 +28,12 @@
   <div class="container">
     <form id="c_form-h" method="post" action="<?= base_url('user/storeDoctor'); ?>" enctype="multipart/form-data">
       <div class="form-group row"> 
+        <label for="judul" class="col-2 col-form-label">Username*</label>
+        <div class="col-3">
+          <input type="text" class="form-control" name="USERNAME" required> 
+        </div>
+      </div>
+      <div class="form-group row"> 
         <label for="judul" class="col-2 col-form-label">Email*</label>
         <div class="col-3">
           <input type="email" class="form-control" name="EMAIL" required> 

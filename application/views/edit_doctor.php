@@ -27,6 +27,12 @@
 <div class="py-4">
   <div class="container">
     <form id="c_form-h" method="post" action="<?= base_url('user/editDoctor'); ?>" enctype="multipart/form-data">
+    <div class="form-group row"> 
+        <label for="judul" class="col-2 col-form-label">Username*</label>
+        <div class="col-3">
+          <input type="text" class="form-control" name="USERNAME" value="<?= $doctor->USERNAME?>" readonly required> 
+        </div>
+      </div>
       <div class="form-group row"> 
         <label for="judul" class="col-2 col-form-label">Email*</label>
         <div class="col-3">
