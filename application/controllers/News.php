@@ -68,7 +68,8 @@ class News extends CI_Controller {
 		$tags = $this->input->post('tag');
 		$config = array(
 			'upload_path' => 'images/news',
-			'allowed_types' => 'jpg|jpeg|png|gif'
+			'allowed_types' => 'jpg|jpeg|png|gif',
+			'filename' => time()
 		);
 		$this->upload->initialize($config);
 		if (empty($title) || empty($content) || empty($category) || empty($tags) || 
@@ -111,7 +112,8 @@ class News extends CI_Controller {
 		$old_files = $this->input->post('old_files');
 		$config = array(
 			'upload_path' => 'images/news',
-			'allowed_types' => 'jpg|jpeg|png|gif'
+			'allowed_types' => 'jpg|jpeg|png|gif',
+			'filename' => time()
 		);
 		$this->upload->initialize($config);
 		if (empty($title) || empty($content) || empty($category) || empty($tags)){
