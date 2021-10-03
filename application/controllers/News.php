@@ -60,7 +60,7 @@ class News extends CI_Controller {
 	}
 
 	public function create(){
-    $id = $this->db->select_max('ID_NEWS', 'id')->get('news')->row()->id;
+    	$id = $this->db->select_max('ID_NEWS', 'id')->get('news')->row()->id;
 		$title = $this->input->post('judul');
 		$content = $this->input->post('isi');
 		$category = $this->input->post('kategori');
@@ -97,7 +97,7 @@ class News extends CI_Controller {
 				$this->Mcoverstory->addNewsToCoverStory($data);
 			}
 			$tag = explode(', ', $tags);
-			$this->Mtags->insertTags($tag, $id);
+			$this->Mtags->insertTags($tag, $id+1);
 			$this->session->set_flashdata('success_message', 'Berita/Artikel berhasil ditambahkan');
 			redirect('news');
 		}
