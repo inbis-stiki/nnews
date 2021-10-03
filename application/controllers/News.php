@@ -72,23 +72,22 @@ class News extends CI_Controller {
 			'filename' => time()
 		);
 		$this->upload->initialize($config);
-		if (empty($title) || empty($content) || empty($category) || empty($tags) || 
-			(($category == 'B' || $category == 'A') && !$this->upload->do_upload('files'))){
+		if (empty($title) || empty($content) || empty($category) || empty($tags) || !$this->upload->do_upload('files')){
 			$this->session->set_flashdata('error_message', 'Harap masukkan data dengan benar!');
 			redirect('news/add_news');
 		} else {
-      $fileData = $this->upload->data();
-      $this->image_resize($fileData);
+			$fileData = $this->upload->data();
+			$this->image_resize($fileData);
 			$data = array(
-        'ID_NEWS' => $id + 1,
+        		'ID_NEWS' => $id + 1,
 				'TITLE_NEWS' => $title,
 				'CONTENT_NEWS' => $content,
 				'ID_CATEGORY' => $category,
 				'VIEWS_COUNT' => 0,
 				'SHARES_COUNT' => 0,
-        'DATE_NEWS' => date('Y-m-d H:i:s'),
-        'USER_EDITOR' => $this->session->userdata('username'),
-        'STATUS' => 'draft',
+				'DATE_NEWS' => date('Y-m-d H:i:s'),
+				'USER_EDITOR' => $this->session->userdata('username'),
+				'STATUS' => 'draft',
 				'NEWS_IMAGE' => $fileData['file_name']
 			);
 			$this->Mnews->createNews($data);
@@ -121,8 +120,8 @@ class News extends CI_Controller {
 			redirect('news/edit_news/' . $id_news);
 		} else {
 			if ($this->upload->do_upload('files')){
-        $fileData = $this->upload->data();
-        $this->image_resize($fileData);
+				$fileData = $this->upload->data();
+				$this->image_resize($fileData);
 				$old = $this->db->where('ID_NEWS', $id_news)->get('news')->row();
 				$old_files = isset($old->NEWS_IMAGE) ? $old->NEWS_IMAGE : NULL;
 				unlink('images/news/'.$old_files);
